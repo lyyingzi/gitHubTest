@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>结算账单</title>
+    <link rel="stylesheet" href="../css/base.css"/>
+    <link rel="stylesheet" href="../css/common.css"/>
+    <link rel="stylesheet" href="../css/settingBill.css"/>
+    <link rel="stylesheet" href="../css/jquery-ui.min.css"/>
+	<link rel="stylesheet" type="text/css" href="../css/jquery-ui.min.css">
+	<link rel="stylesheet" type="text/css"  href="../js/skin/jedate.css">
+</head>
+<body>
+<!--header start-->
+<div class="header_car_bg">
+</div>
+<!--header end-->
+<!--main start-->
+<div class="nav_wrap bg_array01 font16">
+    <div class="container">
+        <div class="nav_bread font-array02  center">当前位置：<span>结算账单</span></div>
+        <div class="nav_main mbottom20">
+          
+        </div>
+        <!--search start-->
+        <input type="hidden" id="uId"/>
+        <div class="bill_search mbottom20">
+            <div class="bill_search_main bxs-one pleft35">
+                <span class="mright15">发送方</span>
+                <input type="text" class="search_text mright40 sendComName"/>
+                <span class="mright15">会议开始时间</span>
+                <span class="search_date">
+                    <input type="text" class="search_text datePrev date_icon" id="overAllStartDate"/>
+                </span>
+                <span class="line mleft10 mright10"></span>
+                <span class="search_date">
+                     <input type="text" class="search_text dateNext date_icon" id="overAllEndDate"/>
+                </span>
+            </div>
+            <div class="bill_search_btn searchBtn">
+
+            </div>
+        </div>
+        <!--search end-->
+        <!--bill start-->
+        <div class="bill_total mbottom20 bxs-one" id="totalAmount">
+            <span class="mright40">账单总金额（元）</span>
+            <span class="sub_color_red font30" id="amount"></span><span class="sub_color_red font30">元</span>
+        </div>
+        <!--bill end-->
+        <!--bill_main start-->
+        <div class="bill_main mbottom20 bxs-one">
+            <table class="bill_table" cellpadding="0" cellspacing="0">
+                <tbody>
+                </tbody>
+            </table>
+        </div>
+        
+		<!--page最新-->
+        <div class="account_page center" style="width:1190px; height:165px; margin-top:40px;">
+            <ul class="page-nav settingBill-page-nav"></ul> 
+        </div>
+        <!--change page end-->
+        <div class="clear"></div>
+    </div>
+
+</div>
+<!--main end-->
+
+<!--footer start-->
+<div class="footer_car_bg bg_blue">
+    <div class="footer_car center bg_blue">
+        <div class="about_us_car">
+            <span class="span_right"><a href="#">意见反馈</a></span>
+            <span class="span_right"><a href="#">关于我们</a></span>
+            <span class=""><a href="#">联系我们</a></span>
+            <div class="imice_logo_main mtop20">
+                <div class="imice_logo fl mleft60"></div>
+                <div class="fl mleft40">
+                    <p class=" align-center line-height40">客服热线：010-57074011</p>
+                    <p class="align-center">服务邮箱：wemeeting@i-mice.cn</p>
+                </div>
+            </div>
+        </div>
+        <div class=" align-center font-array01 copy_right_car">京ICP备16027591号-2&nbsp;&nbsp;|&nbsp;&nbsp;中青博联整合营销顾问股份有限公司&nbsp; &nbsp;北京爱麦思科技有限公司</div>
+    </div>
+</div>
+<!--footer end-->
+
+<!--right_nav 右侧导航-->
+<div class="right_nav">
+</div>
+
+
+<script type="text/javascript" src="../js/jquery-3.1.1.min.js"></script>
+<script type="text/javascript" src="../js/jquery-ui.min.js"></script>
+<script type="text/javascript" src="../js/jquery.page.js"></script>
+<script type="text/javascript" src="../js/util.js"></script>
+<script type="text/javascript" src="../js/common.js"></script>
+<script type="text/javascript" src="../js/interface.js"></script>
+<script type="text/javascript" src="../js/settingBill.js"></script>
+<script type="text/javascript" src="../js/handle.js"></script>
+<script type="text/javascript" src="../js/jquery.jedate.js"></script>
+</body>
+<script>
+
+	$(document).ready(function(){
+		settingBill.getPageData(1);
+	}); 
+
+	$("#overAllStartDate").jeDate({
+		skinCell:"jedateorange",
+		isinitVal:false,
+		festival:false,
+		ishmsVal:false,
+		hmsLimit:false,
+		isClear :true,
+		isToday :false,
+		format:"YYYY-MM-DD",
+	});
+	
+	$("#overAllEndDate").jeDate({
+		skinCell:"jedateorange",
+		isinitVal:false,
+		festival:false,
+		ishmsVal:false,
+		hmsLimit:false,
+		isClear :true,
+		isToday :false,
+		format:"YYYY-MM-DD",
+	});
+	
+    //搜索
+    $(".searchBtn").click(function () {
+        settingBill.getPageData(1);//加载此页数据
+    });
+
+    $(document).ajaxStop(function(){
+
+
+        $.each( $(".meetingName"),function(index,item){
+            console.log(item);
+            var nameText = $(item).text();
+            if ($(item).text().length > 10) {
+                $(item).html(nameText.slice(0,10) + "...");
+            }
+
+        });
+    });
+	
+</script>
+</html>

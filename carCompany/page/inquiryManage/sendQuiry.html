@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>询价单管理列表</title>
+<meta name="author" content="quyun@bravolinks.cn" />
+<link rel="stylesheet" type="text/css" href="../css/base.css" />
+<link rel="stylesheet" type="text/css" href="../css/common.css">
+<link rel="stylesheet" type="text/css" href="../css/inquiryManage.css">
+<link rel="stylesheet" type="text/css" href="../css/jquery-ui.min.css">
+<link rel="stylesheet" type="text/css" href="../css/jquery.timepicker.css">
+<link rel="stylesheet" type="text/css"  href="../js/skin/jedate.css">
+</head>
+
+<body>
+<!--header start-->
+	<div class="header_car_bg">
+	</div>
+	<!--header end-->
+
+	<div class="nav_wrap bg_array01">
+		<div class="nav_bread font-array02  center">当前位置：询价单管理>询价单</div>
+		<div class="nav_main center">
+		<!--6个tag-->
+		</div>
+		<div id="inquiryManageNotReply">
+			<div class="inquiry_list_main center  mtop20">
+				<div class="fl">
+					<span>询价单号：</span><span id="xunjiaNo"></span>
+				</div>
+				<div class="fl  sender_name">
+					<span>发送人：</span><span id="sendComName"></span><span class="mleft10" id="sendUserName"></span><span class="mleft10" id="sendUserPhone"></span>
+				</div>
+			</div>
+			
+			<!-- 进度条 -->
+			<div class="list_content center ">
+				<div class="order_status"> 
+					<p class="order_title" id="quiryTitle">
+					</p>
+					
+					<p class="progress_bar" id="progressBar">
+					</p>
+				</div>
+			</div>
+			
+			<div class="use_car_main mtop10">
+			  <dl class="section">
+				<dt class="section_title"><h3 class="ico_usecar">用车</h3></dt>
+				<dd class="section_body mtop5">
+					<dl class="section_body_detial">
+						<dt class="section_body_detial_label">会议名称</dt>
+						<dd class="section_body_detial_value requirement_esc" id="conName"></dd>
+					</dl>
+					<dl class="section_body_detial">
+						<dt class="section_body_detial_label">用车方式</dt>
+						<dd class="section_body_detial_value" id="useCarDesc"></dd>
+					</dl>
+					<dl class="section_body_detial" id = "bc_carTypeDescDl">
+						<dt class="section_body_detial_label">包车类型</dt>
+						<dd class="section_body_detial_value" id="airCarTypeDesc"></dd>
+					</dl>
+					<!--
+					<dl class="section_body_detial">
+						<dt class="section_body_detial_label">航班/车次</dt>
+						<dd class="section_body_detial_value" id="airTrainNo"></dd>
+					</dl>
+					-->
+					<dl class="section_body_detial">
+						<dt class="section_body_detial_label">用车时间</dt>
+						<dd class="section_body_detial_value" id="useCarTime"></dd>
+					</dl>
+					<dl class="section_body_detial">
+						<dt class="section_body_detial_label">上车地点</dt>
+						<dd class="section_body_detial_value" id="startAddress"></dd>
+					</dl>
+					<dl class="section_body_detial" id="endAddressDl">
+						<dt class="section_body_detial_label">下车地点</dt>
+						<dd class="section_body_detial_value" id="endAddress"></dd>
+					</dl>
+					<dl class="section_body_detial">
+						<dt class="section_body_detial_label">车型选择</dt>
+						<dd class="section_body_detial_value" id="carTypeDesc"></dd>
+					</dl>
+					<dl class="section_body_detial">
+						<dt class="section_body_detial_label">座位数量</dt>
+						<dd class="section_body_detial_value" id="seatCount"></dd>
+					</dl>
+					<!--<dl class="section_body_detial">-->
+						<!--<dt class="section_body_detial_label">需求描述</dt>-->
+						<!--<dd class="section_body_detial_value" id="requirementDesc"></dd>-->
+					<!--</dl>-->
+					<div class="clear"></div>
+				</dd>
+			  </dl>
+                <div class="" style="padding-right: 30px;">
+                    <dt class="section_body_detial_label">需求描述</dt>
+                    <dd class="section_body_detial_value requirement_esc" id="requirementDesc"></dd>
+                    <div class="clear"></div>
+                    <div style="text-align:right">
+                        <span style="cursor: pointer;color:#FFAF24" id="showAll">展开</span>
+                    </div>
+                </div>
+			</div>
+			
+			<div class="reply_inquiry mtop20 text_select_disable">
+				<dl class="section">
+					<dt class="section_title"><h3 class="ico_reply_inquiry">回复询价</h3></dt>
+					<dd class="section_body mtop5">
+						<dl class="reply_inquiry_detial">
+							<dt class="reply_inquiry_detial_label">能否预订</dt>
+							<dd class="reply_inquiry_detial_value" id="isReserve">
+								<span class="btn_limit_array btn_limit_yellow_selected" role="reply-inquiry-enabled" value="01">能</span>
+								<span class="btn_limit_array mleft15" role="reply-inquiry-disabled" value="00">不能</span>
+							</dd>
+						</dl>
+						<dl class="reply_inquiry_detial">
+							<dt class="reply_inquiry_detial_label">可选车型</dt>
+							<dd class="reply_inquiry_detial_value">
+								<select class="car_common_select select_cont" id="vehicleModel" style="height:35px;width: 130px">
+								</select>
+							</dd>
+						</dl>
+						<dl class="reply_inquiry_detial">
+							<dt class="reply_inquiry_detial_label" >报价时限</dt>
+							<dd class="reply_inquiry_detial_value">
+								<input class=" date-input-long text_input_date_long" id="stopTime" type="text" placeholder="用户需在报价时限前提交订单" value=""  />
+							</dd>
+						</dl>
+						<dl class="reply_inquiry_detial">
+							<dt class="reply_inquiry_detial_label">总计金额</dt>
+							<dd class="reply_inquiry_detial_value total_amount_main">
+								<div>
+								<input type="text" class="short_text_input" id="amount" placeholder="总计金额">
+								<span class="mleft5">元</span>                
+								<span class="mleft60 font_yellow include_more" role="include-more1">报价包含 <i class="circle_arrow_right"></i></span>
+								<span class="text_pop text_pop_yellow include_more_pos line-height20" role="include-more-pos">输入详细报价，最多三项</span>
+								</div>
+								
+								<div class="add_amount_main" style = "display:block">
+									<span class="add_btn_yellow_limit" id="inquiryAddItem">添加项目</span>
+									<div class="add_amount_cont" >
+									</div>
+								</div>
+							</dd>
+						</dl>
+						<dl class="reply_inquiry_detial">
+							<dt class="reply_inquiry_detial_label">其他说明</dt>
+							<dd class="reply_inquiry_detial_value">
+								<textarea name="" cols="" rows=" " id="otherDesc" class="short_text_textarea" placeholder="说明用车情况"></textarea>
+								<div></div>
+							</dd>
+						</dl>
+						<div class="clear"></div>
+					</dd>
+				</dl>
+			</div>
+			
+			<div class="operate_btn_main center text_select_disable" id="replyButton" style="display:none;">
+				<span class="operate_btn_yellow_limit" role="inquiry-reply-btn" id="sendQuiry">发送回复</span>
+				<span class="operate_btn_yellow_limit" role="close-inquiry-reply-btn">返回</span>
+			</div>
+		</div>
+	</div>
+
+	<!--footer start-->
+	<div class="footer_car_bg bg_blue">
+	</div>
+	<!--footer end-->
+
+	<!--right_nav 右侧导航-->
+	<div class="right_nav">
+	</div>
+</body>
+<script type="text/javascript" src="../js/jquery-1.11.1.min.js"></script>
+<script type="text/javascript" src="../js/jquery-ui.min.js"></script>
+<script type="text/javascript" src="../js/jquery.page.js"></script>
+<script type="text/javascript" src="../js/common.js"></script>
+<script type="text/javascript" src="../js/interface.js"></script>
+<script type="text/javascript" src="../js/util.js"></script>
+<script type="text/javascript" src="../js/handle.js"></script>
+<script type="text/javascript" src="../js/inquiryManage.js"></script>
+<script type="text/javascript" src="../js/jquery.jedate.js"></script>
+<script type="text/javascript">
+	$(document).ready(function(){
+		quiryNo = localStorage.quiryNo;
+		state = localStorage.quiryState;
+		quiryManagement.sendQuiryDetail(quiryNo,state);
+	});
+	
+	$("#stopTime").jeDate({
+		skinCell:"jedateorange",
+		isClear :true,
+		isToday :false,
+		minDate:util.nowFormatDate(),
+		format:"YYYY-MM-DD hh:mm",
+	});
+	
+	$("#sendQuiry").click(function(){
+		quiryManagement.revertQuiry(localStorage.quiryNo,localStorage.quiryState);
+	});
+	
+	$("span[role='close-inquiry-reply-btn']").on("click", function () {
+        window.history.go(-1);
+    });
+    $(document).ajaxStop(function() {
+        //		点击需求描述显示或隐藏内容
+        $(".use_car_main #showAll").click(function () {
+            var _this = $(this);
+            if (_this.text() == "展开") {
+                _this.parent().siblings("#requirementDesc").removeClass("requirement_esc");
+                _this.text("收起");
+            } else if (_this.text() == "收起") {
+                _this.parent().siblings("#requirementDesc").addClass("requirement_esc");
+                _this.text("展开");
+            }
+        });
+//		////	根据需求描述文字决定是否显示或隐藏展开
+        if (quiryManagement.getWidth("#requirementDesc") < $("#requirementDesc").width() || $("#requirementDesc").text().length == 0) {
+            $("#showAll").hide();
+        } else {
+            $("#showAll").show();
+        }
+    });
+</script>
+
+</html>

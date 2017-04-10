@@ -1,0 +1,52 @@
+/*版心*/
+.container {
+    width: 1190px;
+    margin: 0 auto;
+}
+/*主题色*/
+.sub_color_orange {
+    color: #FFAF24;
+}
+s, i, em {
+    font-style: normal;
+    text-decoration: none;
+}
+.message_details {
+    background-color: #fff;
+}
+.message_title {
+    padding: 0 40px ;
+}
+.message_title_details {
+    padding: 30px 0 ;
+}
+.message_title_details img {
+    vertical-align: middle;
+}
+
+/*消息处理*/
+.circle {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    margin-right: 10px;
+    border: 1px solid #FFAF24;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    border-radius: 10px;
+    vertical-align: top;
+}
+.bg {
+    background: url(../img/msg/msg_check.png);
+}
+/*消息列表*/
+.message_list {
+    
+}
+.message_list li {
+    padding: 20px 40px;
+    /*background-color: pink;*/
+}
+.message_list li:nth-child(2n+1) {
+    background-color: #F0F1F3;
+}

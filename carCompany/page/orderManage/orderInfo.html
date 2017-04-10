@@ -1,0 +1,1071 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+    <title>确认后订单</title>
+    <meta name="author" content="hexiaobao"/>
+    <link rel="stylesheet" type="text/css" href="../css/base.css" />
+    <link rel="stylesheet" type="text/css" href="../css/common.css">
+    <link rel="stylesheet" type="text/css" href="../css/orderManage.css">
+    <link rel="stylesheet" type="text/css" href="../css/jquery-ui.min.css">
+
+</head>
+
+<body>
+<!--header start-->
+<input type="hidden" id="userId" value="">
+<input type="hidden" id="comId" value="">
+<input type="hidden" id="orderNo" value="">
+<input type="hidden" id="state" value="">
+<div class="header_car_bg">
+    <div class="header_car center">
+        <div class="header_logo_main">
+            <a href="#"><img class="header_logo" src="../img/com_logo.png" width="103" height="102"></a>
+            <span class="com_name" id="comName"></span><span>,您好,欢迎登录WeMeeting</span>
+            <div class="clear"></div>
+        </div>
+
+        <div class="header_car_alarm">
+            <span  id="time"></span>
+            <i class="icon_car_alarm"></i>
+            <div class="car_message" id="alert"></div>
+        </div>
+        <a class="logout">退出登录</a>
+        <a class="logoin_pwd" >修改密码</a>
+
+    </div>
+</div>
+<!--header end-->
+
+<!--body start-->
+<div class="nav_wrap bg_array01">
+    <div class="nav_bread font-array02  center">当前位置：<span>订单管理</span>>订单</div>
+    <!-- 6个tag-->
+    <div class="nav_main center">
+    </div>
+    <!-- serch-->
+    <div class="search_wrap affirm_search">
+		<input type="hidden" id="conId" value="">
+        <div class="search_main ">
+            <div class="search_input fl">
+                <div class="fl">
+                    <span class="mleft7">订单号：</span><span id="orderNumber"></span>
+                    <span class="mleft130">发送人：</span>
+                    <span class="mright15" id="sendComName"></span>
+                    <span class="mright15" id="sendUserName"></span>
+                    <span id="sendUserPhone"></span>
+                </div>
+                <div class="clear"></div>
+            </div>
+        </div>
+        <div class="clear"></div>
+    </div>
+   <!-- progress bar-->
+    <div class="list_content c">
+        <div class="order_status">
+            <p class="order_title">
+            </p>
+            <p class="progress_bar">
+            </p>
+        </div>
+    </div>
+    <!--content -->
+	<!--po单弹窗-->
+    <div class="po_popup popup">
+        <div class="shade"></div>
+		<span class="po_close"></span>
+        <span class="po" id="poDan" style="display:block">
+
+            <div id="poDan" style="float:left">
+            </div>
+        </span>
+        <div style="clear:both">
+        </div>
+    </div>
+    <div class="account_wrap center">
+        <div class="c">
+            <div class="meeting_info">
+                <ul>
+                    <li><span class="content_mark">会议名称</span><span id="conName" class="requirement_esc"></span></li>
+                    <li><span class="content_mark">会议编码</span><span id="conCode"></span></li>
+                    <li id="poDanLi"><span class="content_mark">会议po单</span>
+                        <div class="po_file">
+
+                        </div>
+                        <!--<span class="po" id="poDan" style="display:block">-->
+
+						<!--<dd style="vertical-align:middle">-->
+    						<!--<div id="poDan" style="float:left">-->
+       						<!--</div>-->
+    					<!--</dd>-->
+       					<!--<div style="clear:both">-->
+       					<!--</div>-->
+
+
+					</li>
+                    <li id="poLimit"><span class="content_mark">PO单限额</span><span id="poPrice"></span>元</li>
+                </ul>
+            </div>
+            <div class="total_money">
+                <div class="total_money_top">
+                    <span class="total_money_img"></span>
+                    <span class="total_money_title">订单总费用预算</span>
+                </div>
+                <ul class="total_money_bottom">
+                    <!--<li><span class="content_mark">总计金额</span><span id="sendAmount"></span>元</li>-->
+                    <li>
+                        <span class="content_mark">总计金额</span>
+                        <span id="sendAmount"></span>元
+						<div style="width:40%;display:none;" id="fileUplodDiv" class="fileUplodDiv">
+							<!--付款标识-->
+							<span class="pay_sign"></span>
+							<!--上传票据按钮-->
+							<!--<div class="file" id="feeFile">-->
+							<div class="file" id="fileDiv1">
+								<!--<input type="file" name="uplaodFiles" id="uplaodFiles" class="file_img"/>-->
+							</div>
+							<!--上传票据弹窗-->
+							<div class="popup upload_popup">
+								<div class="shade"></div>
+								<span class="upload_close"></span>
+								<div class="upload_content" id="uploadContent">
+									<span class="upload_close"></span>
+									<span id="uplaodFiles" class="chose_file">选择文件</span>
+									<span id="fileName1"></span>
+									<div>
+										文件描述：<textarea name="" class="fileDesc" ></textarea>
+									</div>
+									<div class="btn" class="btnParent">
+										<button class="qiNiu">保存</button>
+									</div>
+
+								</div>
+							</div>
+							<!--下载标识-->
+							<span class="fee_upload"><span class="fee_remind">下载/查看票据</span></span>
+							<!--查看总票据弹窗-->
+							<div class="popup check_popup">
+								<div class="shade"></div>
+								<span class="check_close"></span>
+								<div class="content">
+
+								</div>
+							</div>
+							<!--查看票据图片弹窗-->
+							<div class="img_popup">
+								<div class="content">
+									<span class="img_popup_close"></span>
+									<img src="" alt=""/>
+								</div>
+							</div>
+						</div>
+					</li>
+					<li id="extraCostAmount" style="display:none;"><span class="content_mark">追加扣款</span><span id="sendExtraCost"></span>元
+						<div style="width:40%;display:none;" id="fileUplodDivZJ" class="fileUplodDiv">
+							<!--付款标识-->
+							<span class="pay_sign"></span>
+							<!--上传票据按钮-->
+							<!--<div class="file" id="feeFile">-->
+							<div class="file" id="fileDiv2">
+								<!--<input type="file" name="uplaodFiles" id="uplaodFiles" class="file_img"/>-->
+							</div>
+							<!--上传票据弹窗-->
+							<div class="popup upload_popup">
+								<div class="shade"></div>
+								<span class="upload_close"></span>
+								<div class="upload_content" id="uploadContentZJ">
+									<span class="upload_close"></span>
+									<!--<input type="file" name="uplaodFiles" id="uplaodFiles"/>-->
+									<!--<a href="#" ><span>选择文件</span></a>-->
+									<span id="uplaodFilesZJ" class="chose_file">选择文件</span>
+									<span id="fileName2"></span>
+									<div>
+										文件描述：<textarea name="" class="fileDesc" ></textarea>
+									</div>
+									<div class="btn" class="btnParent">
+										<button class="qiNiu">保存</button>
+									</div>
+
+								</div>
+							</div>
+							<!--下载标识-->
+							<span class="fee_upload"><span class="fee_remind">下载/查看票据</span></span>
+							<!--查看总票据弹窗-->
+							<div class="popup check_popup">
+								<div class="shade"></div>
+								<span class="check_close"></span>
+								<div class="content">
+
+								</div>
+							</div>
+							<!--查看票据图片弹窗-->
+							<div class="img_popup">
+								<div class="content">
+									<span class="img_popup_close"></span>
+									<img src="" alt=""/>
+								</div>
+							</div>
+						</div>
+					</li>
+                </ul>
+            </div>
+            <div class="use_car">
+                <div class="use_car_top">
+                    <span class="use_car_img"></span>
+                    <span class="use_car_title">用车</span>
+                </div>
+                <ul class="use_car_bottom">
+                    <li><span class="content_mark">用车方式</span><span id="useCarType"></span></li>
+                    <li><span class="content_mark">用车时间</span><span id="useCarTime"></span></li>
+					<li id = "bc_carTypeDescLi"><span class="content_mark">包车方式</span><span id="bc_carTypeDesc"></span></li>
+                    <li><span class="content_mark">上车地点</span><span id="startAddress"></span></li>
+					<input type ="hidden"  id="slng"  value=""/><input type ="hidden"  id="slat"  value=""/>
+                    <li id="endAddressControl"  style="display:none"><span class="content_mark">下车地点</span><span id="endAddress"></span></li>
+					<input type ="hidden"  id="elng"  value=""/><input type ="hidden"  id="elat"  value=""/>
+                    <li><span class="content_mark">车型选择</span><span id="carType"></span></li>
+                    <li><span class="content_mark">座位数量</span><span id="seatCount"></span></li>
+                    <li class="total_amount_main">
+                        <span class="content_mark">可选车型</span><span id="vehicleModelName"></span>
+					    <!--<span class="mleft60 font_yellow include_more " role="car-info-more">车型描述 <i class="circle_arrow_right"></i></span>-->
+					    <span class="mleft60 font_yellow include_more " role="car-info-more">车型描述</span>
+					    <span  role="car-info-more-pos" class="text_pop_array  line-height20"><p id="vehicleModelDesc" class="line-height24"></p></span>
+                    </li>
+                    <li id="amountLi" style="display:none;position:relative"><span class="content_mark">总计金额</span><span id="amount"></span>元
+						<div id="add_amount_contYC" style="position: absolute;top:-15px;left:50%;color:#999;">
+
+                        </div>
+					</li>
+                    <li><span class="content_mark">乘车人姓名</span><span id="passengeName"></span></li>
+                    <li><span class="content_mark">乘车人电话</span><span id="passengePhone"></span></li>
+                    <!--<li><span class="content_mark">需求描述</span><span id="requirementDesc"></span></li>-->
+                </ul>
+				<div class="" style="padding-right: 30px;padding-left:42px;font-size:16px;">
+					<span class="content_mark" style="float:left">需求描述</span><p id="requirementDesc" class="requirement_esc" style="margin-left:95px"></p>
+					<div class="clear"></div>
+					<div style="text-align:right;padding-bottom: 10px;">
+						<span style="cursor: pointer;color:#FFAF24" id="showAll">展开</span>
+					</div>
+				</div>
+            </div>
+            <div class="affirm_order" id="affirm_order_hide">
+                <div class="order_top">
+                    <div class="affirm_order_top">
+                        <span class="affirm_order_img"></span>
+                        <span class="affirm_order_title"  id="mess">确认订单</span>
+                    </div>
+                    <div class="affirm_order_top">
+                        <span class="content_mark">回复人</span><span id="revertComName"></span>&nbsp;&nbsp;&nbsp;&nbsp;<span id="revertUserName"></span>
+                    </div>
+                </div>
+				
+                <!--<ul class="affirm_order_bottom">-->
+                <div class="affirm_order_bottom" style="margin-bottom:100px">
+                    <!--<li  id="isCancleControl"   style="display:none"><span class="content_mark">确认预定</span><span  id="isCancle"></span></li>-->
+					<!--<div id="revertControl"  style="display:none">-->
+					<ul id="_cancleOrder"  style="display:none">
+                        <li><span class="content_mark">确认预定</span><span  id="_isCancle"></span></li>
+					</ul>
+					<ul id="revertControl"  style="display:none">
+
+                        <!--<li>
+                            <span class="content_mark">回复人</span><span id="revertComName"></span>&nbsp;&nbsp;&nbsp;&nbsp;<span id="revertUserName"></span>
+                        </li>-->
+                        <li  id="isCancleControl"   style="display:none"><span class="content_mark">确认预定</span><span  id="isCancle"></span></li>
+							 <li><span class="content_mark">取消时限</span><span id="stopTime"></span></li>
+							<li id="extral" style="display:none">
+								<span class="content_mark">追加扣款</span><span id="extraCost"></span><span class="mleft5">元</span>
+							  </li>
+							 <li><span class="content_mark">司机姓名</span><span id="driverName"></span></li>
+							 <li><span class="content_mark">司机电话</span><span id="driverPhone"></span></li>
+							<li><span class="content_mark">车牌号码</span><span id="vehicleNo"></span></li>
+							<li class="total_amount_main"><span class="content_mark">总计金额</span><span id="totalAmount" style="width:110px;text-align: right;display:inline-block"></span><span class="mleft5">元</span>
+							    <!---  ---- 样式by ly-->
+                                <div id="add_amount_main" style="display:none;position:absolute;">
+                                	<!--<span class="add_btn_yellow_limit"  id="orderAddItem">报价包含</span>-->
+                                	<span class="font_yellow"  id="orderAddItem">报价包含</span>
+                                	<div id="add_amount_cont">
+
+                                	</div>
+								</div>
+							<!--<span class="mleft60 font_yellow include_more fee_scale" role="include-more">收费标准<i class="circle_arrow_right"></i></span>-->
+							<!--<div id="feeStandard" style="display:none">-->
+	       					<!--</div>-->
+							<span class="mleft60 font-array04 charges_info mleft15" role="charges-info">收费标准<i class="ico_charges_info"></i></span>
+							<span class="text_pop_array car_info_more_pos line-height20" role="charges-info-more-pos" style="display: none;padding:0">
+							<ul class="down_list" id="down_list"></ul>
+							</span>
+	       					<div style="clear:both">
+							</div>
+							</li>
+							<li>
+								<span class="content_mark" style="float:left">其他说明</span>
+								<p id="otherDesc" class="other_desc" style="margin-left: 95px;"></p>
+								<div style="text-align:right">
+									<span style="cursor: pointer;color:#FFAF24" id="otherAll">展开</span>
+								</div>
+							</li>
+					</ul>
+                </div>
+                <div class="clear"></div>
+            </div>
+        </div>
+		<div class="replay_button"  id="buttonControl"  style="display:none;">
+			<button class="cancle"    id="sendOrder"   style="display:none;">回复订单</button>
+			<button class="cancle"    id="cancle"   style="display:none;">取消订单</button>
+			<button class="cancle"    id="update"   style="display:none;">修改订单</button>
+			<button class="receipt"   id="confirm"   style="display:none;">确认收款</button>
+			<button class="back"   id="back"   style="display:none;">返回</button>
+		</div>
+        <!-- right-nav-->
+
+
+    </div>
+</div>
+<!--body end-->
+
+<!--footer start-->
+<div class="footer_car_bg bg_blue">
+    <div class="footer_car center bg_blue">
+        <div class="about_us_car">
+            <span class="span_right"><a href="#">意见反馈</a></span>
+            <span class="span_right"><a href="#">关于我们</a></span>
+            <span class=""><a href="#">联系我们</a></span>
+            <div class="imice_logo_main mtop20">
+                <div class="imice_logo fl mleft60"></div>
+                <div class="fl mleft40">
+                    <p class=" align-center line-height40">客服热线：010-57074011</p>
+                    <p class="align-center">服务邮箱：wemeeting@i-mice.cn</p>
+                </div>
+            </div>
+        </div>
+        <div class=" align-center font-array01 copy_right_car">京ICP备16027591号-2&nbsp;&nbsp;|&nbsp;&nbsp;中青博联整合营销顾问股份有限公司&nbsp; &nbsp;北京爱麦思科技有限公司</div>
+    </div>
+</div>
+<!--footer end-->
+
+<!--right_nav 右侧导航-->
+<div class="right_nav">
+</div>
+<script type="text/javascript" src="../js/jquery-1.11.1.min.js"></script>
+<script type="text/javascript" src="../js/jquery-ui.min.js"></script>
+<!--七牛上传-->
+<script src="../js/plupload.full.min.js"></script>
+<script src="../js/plupload.min.js"></script>
+<script src="../js/qiniu.js"></script>
+<script type="text/javascript" src="../js/common.js"></script>
+<script type="text/javascript" src="../js/interface.js"></script>
+<script type="text/javascript" src="../js/util.js"></script>
+<script type="text/javascript" src="../js/handle.js"></script>
+<script src="../js/jquery.bootstrap.modal.js"></script>
+<script src="../js/qiniushow.js"></script>
+<!--<script src="../js/upload.js"></script>-->
+<script>
+
+
+
+$(document).ready(function(){
+
+
+
+
+
+	$("#userId").val(AUTOCAR.data_uId);
+	$("#comId").val(AUTOCAR.data_comId);
+	$("#orderNo").val(localStorage.orderNo);
+	
+	var uId = $("#userId").val();
+	var orderNo = $("#orderNo").val();
+	
+	var str1 = {token:05,uId:uId,equipment:3,ver:"001",udid:"002",appver:123456,orderNo:orderNo};
+	var allPath= interface.host + '/vehiclecenter/carOrder/info';
+	$.ajax({
+ 		type: "post",
+		url: allPath,
+		cache:false,
+		async:false,
+		data:str1,
+		dataType: "json", 
+       	success:function(data)  { 
+       		console.log(data);
+			var d = data.rows[0];
+			$("#conId").val(d.cId);
+			var title = "";
+			var titleState = "";
+			var index = 0;
+			var flag = true;
+				for (var i = 0 ; i < d.stateList.length; i++){
+				var stateList = d.stateList[i];
+				title += "<span>"+stateList["stateName"]+"</span>";
+				if(d.state == stateList["stateCode"]){
+					index = 1;
+				}
+				
+				if(flag && index == 0){
+					titleState += "<span class='round light_round'></span>"
+					if(i < d.stateList.length - 1){
+						titleState += "<span class='line light_line'></span>"
+					}
+				}  else if  (flag && index == 1){
+					if (i == d.stateList.length -1){
+						titleState += "<span class='round shine_round_main'><span class='shine_round'></span></span>"
+					} else {
+						titleState += "<span class='round shine_round_main'><span class='shine_round'></span></span>"
+						titleState += "<span class='line'></span>"
+					}
+				} else {
+					if (i == d.stateList.length -1){
+						titleState += "<span class='round'></span>"
+					} else {
+						titleState += "<span class='round'></span>"
+						titleState += "<span class='line'></span>"
+					}
+				}
+
+				
+				if(d.state == stateList["stateCode"]){
+					flag = false;
+				}
+			}
+			$("#state").val(d.state);
+			localStorage.state = d.state;
+			$(".order_title").append(title);
+			$(".progress_bar").append(titleState);
+			$("#userId").val(d.revertUserId);
+			$("#comId").val(d.revertComId);
+			$("#orderNo").val(d.orderNo);
+			$("#comName").html(d.revertComName);
+			$("#orderNumber").html(d.orderNo);
+			$("#sendComName").html(d.sendComName);
+			$("#sendUserName").html(d.sendUserName);
+			$("#sendUserPhone").html(d.sendUserPhone);
+			$("#conName").html(d.conName);
+			$("#conCode").html(d.conCode);
+			//PO单展示
+			var poName_ = [];
+            var poFile = d.poDan;
+        	var filePath = "";
+        	var fileName = "";
+        	if(null != poFile && poFile.length > 0){
+	        	for(var i = 0; i < poFile.length; i++){
+	        		filePath = poFile[i].poUrl;
+	        		fileName = poFile[i].poName;
+//		            var fileTypeStr = fileName.substring(fileName.lastIndexOf(".") + 1,fileName.length);
+//		        	var tdHtml = qiniushow(fileTypeStr,fileName,filePath);
+//		        	poName_.push(tdHtml);
+                    var html = '<div style="margin-bottom:10px">'+
+                            '<img src="../img/orderManageImg/order_file.png" alt="" style="margin-right:20px;vertical-align: middle"/>' +
+                            '<a download href="'+ filePath +'">'+ fileName +'</a>'+
+                            '</div>';
+                    $('#poDan').append(html);
+	    		}
+        	} else {
+				$("#poLimit").css("display","none");
+				$("#poDanLi").css("display","none");
+			}
+//    		$('#poDan').html('').append(poName_.join(''));
+    		 events();
+
+			if(null == d.poPrice || "" == d.poPrice){
+				$("#poLimit").hide();
+			}else{
+				$("#poPrice").html(util.formatCurrency(d.poPrice));
+			}
+			$("#sendAmount").html(util.formatCurrency(d.amount));
+			$("#useCarType").html(d.useCarDesc);
+			$("#useCarTime").html(timestampToDate(d.useCarTime));
+			$("#startAddress").html(d.startAddress);
+			$("#slng").val(d.slng);
+			$("#slat").val(d.slat);
+			//包车时没有下车地点
+			if(d.useCarType == 31001){
+				$("#endAddressControl").show();
+				$("#endAddress").html(d.endAddress);
+				$("#elng").val(d.elng);
+				$("#elat").val(d.elat);
+				$("#bc_carTypeDescLi").hide();
+			}
+			$("#bc_carTypeDesc").text(d.airCarTypeDesc === null ? '' : d.airCarTypeDesc);	//类型描述（用车方式为接送/包车）有效
+			//$("#airTrainNo").text(m.airTrainNo === null ? '':m.airTrainNo);	//航班/车次 （用车方式为接送）有效
+			$("#carType").html(d.carTypeDesc);
+			$("#seatCount").html(d.seatCount);
+			$("#vehicleModelName").html(d.vehicleModelName);
+			$("#carType").html(d.carTypeDesc);
+			$("#seatCount").html(d.seatCount);
+			$("#vehicleModelName").html(d.vehicleModelName);
+			var desc1 = d.vehicleModelDesc  + "<br/> 说明：";
+			var desc2 = d.vehicleModelOtherDesc === null ? '无' : d.vehicleModelOtherDesc;
+			$("#vehicleModelDesc").html(desc1+desc2);
+			$("#amount").html(util.formatCurrency(d.sendAmount));
+			$("#passengeName").html(d.passengeName);
+			$("#passengePhone").html(d.passengePhone);
+			$("#requirementDesc").html(d.requirementDesc);
+			$("#revertComName").html(d.revertComName);
+			$("#revertUserName").html(d.revertUserName);
+			$("#state").val(d.state);
+			//细分花费项的展示
+			var _newitem = "";
+			for(var i = 0; i < d.quotePrice.length; i++){
+					var costPriceMap = d.quotePrice[i];
+					var costPrice = costPriceMap["costPrice"];
+					var costName = costPriceMap["costName"];
+//					_newitem += "<dl class='add_amount_list'><span class=''  placeholder='花费项目' role='costName' maxlength='10'>"+costName+"</span><span class='mleft40'  placeholder='花费金额' role='costPrice'>"+util.formatCurrency(costPrice)+"</span><span>元</span></dl>";
+					_newitem += "<dl class='add_amount_list'><span class=''  placeholder='花费项目' role='costName' maxlength='10' style='display:inline-block;width:94px'>"+costName+"</span><span class=''  placeholder='花费金额' role='costPrice' style='width:110px;display:inline-block;text-align:right'>"+util.formatCurrency(costPrice)+"</span><span class='mleft5'>元</span></dl>";
+			}
+			if(_newitem != ""){
+					$("#add_amount_main").show();
+					$("#add_amount_cont").append(_newitem);
+					$("#add_amount_contYC").append(_newitem);
+			}
+
+			//是否预定成功展示
+			if(d.state == "504"){//车公司确认不可预定
+				$("#mess").html("确认订单");
+				$("#_cancleOrder").show();
+				$("#_isCancle").html("取消");
+				$("#buttonControl").show();
+				$("#back").show();
+			}else if(d.state == "505"){//客户已取消订单
+				$("#affirm_order_hide").hide();
+				$("#add_amount_cont").css("display","block");
+				$("#amountLi").css("display","inline-block");
+				//$("#mess").html("取消订单");
+				//$("#isCancleControl").show();
+				//$("#isCancle").html("预定成功");
+				$("#buttonControl").show();
+				$("#back").show();
+			}else if(d.state == "506"){//客户已取消订单未过取消时限
+				$("#mess").html("取消订单");
+				$("#revertControl").show();
+				$("#back").show();
+			}else if(d.state == "507"){//车公司已取消订单 没有追加款
+				$("#mess").html("取消订单");
+				$("#revertControl").show();
+				$("#buttonControl").show();
+				$("#back").show();
+				//总计金额样式上调  --by ly
+				$("#affirm_order_hide li:nth-last-of-type(2)").css({"float":"left","margin-right":"5px"});
+
+			}else if(d.state == "508"){//车公司已取消订单 有追加款
+				$("#mess").html("取消订单");
+				$("#revertControl").show();
+				$("#extral").show();
+				$("#buttonControl").show();
+				$("#back").show();
+			}else if(d.state == "509"){//车公司已取消订单 有追加款 客户已付款
+				$("#mess").html("取消订单");
+				$("#revertControl").show();
+				$("#extral").show();
+				$("#buttonControl").show();
+				if(d.revertUserId == AUTOCAR.data_uId){
+					$("#confirm").show();
+				};
+				$("#back").show();;
+			}else if(d.state == "510"){//车公司已取消订单 有追加款 已收款
+				$("#mess").html("取消订单");
+				$("#revertControl").show();
+				$("#extral").show();
+				$("#fileUplodDivZJ").css("display","inline-block").parent().prev().find("#fileUplodDiv").remove();
+				$("#buttonControl").show();
+				$("#back").show();
+				if(d.revertUserId != AUTOCAR.data_uId){
+					$("#fileDiv2").hide();
+				}
+			}else if(d.state == "501"){//订单已完成预定 可修改可取消
+				$("#mess").html("确认订单");
+				$("#isCancleControl").show();
+				$("#isCancle").html("预定成功");
+				$("#revertControl").show();
+				$("#buttonControl").show();
+				if(d.revertUserId == AUTOCAR.data_uId){
+					$("#update").show();
+					$("#cancle").show();
+				};
+				$("#back").show();
+			}else if(d.state == "502"){//客户已付款
+				$("#mess").html("确认订单");
+				$("#isCancleControl").show();
+				$("#isCancle").html("预定成功");
+				$("#revertControl").show();
+				$("#buttonControl").show();
+				if(d.revertUserId == AUTOCAR.data_uId){
+					$("#confirm").show();
+				};
+				$("#back").show();
+			}else if(d.state == "503"){// 车公司已收款
+				$("#mess").html("确认订单");
+				$("#isCancleControl").show();
+				$("#isCancle").html("预定成功");
+				$("#revertControl").show();
+				$("#buttonControl").show();
+				$("#back").show();
+				$("#fileUplodDiv").css("display","inline-block")
+				if(d.revertUserId != AUTOCAR.data_uId){
+					$("#fileDiv1").hide();
+				}
+			} else if (d.state == "500"){
+				$("#affirm_order_hide").hide();
+				$("#buttonControl").show();
+				if(d.revertUserId == AUTOCAR.data_uId){
+					$("#sendOrder").show();
+				};
+				$("#back").show();
+			}
+			
+			if(d.conState == "20005"){
+				$("#fileDiv2").hide();
+				$("#fileDiv1").hide();
+			}
+			
+			$("#stopTime").html(timestampToDate(d.stopTime));
+			
+			if(null != d.extraCost){
+				$("#sendExtraCost").html(util.formatCurrency(d.extraCost));
+				$("#extraCostAmount").show();
+			};
+			$("#extraCost").html(util.formatCurrency(d.extraCost));
+			
+			$("#driverName").html(d.driverName);
+			$("#driverPhone").html(d.driverPhone);
+			$("#vehicleNo").html(d.vehicleNo);
+			$("#totalAmount").html(util.formatCurrency(d.amount));
+			//收费标准展示
+	        	var feeStandardName_ = [];
+			    var filePath = "";
+	        	var fileName = "";
+			$.each(d.feeStandard, function (j,k) {   //收费标准
+				var feeStandardList="<li><a download href=\"" + k.feeStandardUrl + "\">"+ k.feeStandardName+"</a></li>";
+				$("#down_list").append(feeStandardList);
+			});
+//	        	for(var i = 0; i < d.feeStandard.length; i++){
+//	        		var tdHtml = "";
+//					filePath = d.feeStandard[i].feeStandardUrl;
+//	        		fileName = d.feeStandard[i].feeStandardName;
+//		        	var fileTypeStr = fileName.substring(fileName.lastIndexOf(".") + 1,fileName.length);
+//					var tdHtml = qiniushow(fileTypeStr,fileName,filePath);
+//		        	feeStandardName_.push(tdHtml);
+//		        	 events();
+//	        	}
+//	    		$('#feeStandard').html('').append(feeStandardName_.join(''));
+				$("#otherDesc").html(d.otherDesc);
+       	}
+     });
+});
+    //    修改订单
+    $("#update").on("click", function () {
+		localStorage.state = $("#state").val();
+		localStorage.operatorType = "02";
+        location.href="../orderManage/beforConfirm.html";
+    });
+	
+	//  回复订单
+    $("#sendOrder").on("click", function () {
+		localStorage.state = $("#state").val();
+		localStorage.operatorType = "01";
+        location.href="../orderManage/beforConfirm.html";
+    });
+
+    //    取消订单
+    $("#cancle").on("click", function () {
+		localStorage.operatorType = "00";
+		location.href="../orderManage/beforConfirm.html";
+    });
+	  //   确认收款
+    $("#confirm").on("click", function () {
+		var uId = $("#userId").val();
+		var orderNo = $("#orderNo").val();
+		var state = $("#state").val();
+		var str1 = {token:05,uId:uId,equipment:3,ver:"001",udid:"002",appver:123456,orderNo:orderNo,state:state};
+		var allPath= interface.host + '/vehiclecenter/carOrder/confirmation';
+		$.ajax({
+				type: "post",
+				url: allPath,
+				cache:false,
+				async:false,
+				data:str1,
+				dataType: "json", 
+				success:function(data)  { 
+						//$.confirm(data.message, "提示", function() {
+								//刷新本页面
+								alert(data.message);
+								if(data.success){
+										location.reload();
+								}
+	        			//},function(){return false;});
+				}
+		});
+        //window.location.href="cancleOrder.html";
+    });
+
+ $("#back").on("click", function () {
+		  window.history.go(-1);
+  });
+//时间戳转换
+function timestampToDate(timestamp){
+	var d = new Date(timestamp * 1000);    //根据时间戳生成的时间对象
+	var h = d.getHours() + "";
+	var m = d.getMinutes() + "";
+	if(h.length == 1){
+		h = "0" + d.getHours();
+	}
+	if(m.length == 1){
+		m = "0" + d.getMinutes();
+	}
+	var date = (d.getFullYear()) + "年" + 
+	           (d.getMonth() + 1) + "月" +
+	           (d.getDate()) + "日" + 
+	           h + ":" + 
+	           m;
+	return date;
+};
+
+function  now(){
+	var myDate = new Date();
+	var  nowdd =   myDate.toLocaleDateString();
+	$("#time").html(nowdd);	
+};
+setInterval(now(),1000);//定时 - (方法名,定时时间间隔单位毫秒)
+
+
+//点击po单图标，显示弹窗
+$(".meeting_info .po_file").click(function(){
+	$(this).parents("").siblings(".po_popup").show();
+});
+//点击关闭按钮，弹框关闭
+$(".po_popup .po_close").click(function(){
+	$(this).parents(".po_popup").hide();
+});
+
+//点击上传票据按钮，出现弹窗
+$(".fileUplodDiv .file").click(function(){
+	$(".upload_popup .fileDesc").val("");
+	$(this).siblings(".upload_popup").show();
+
+});
+//上传七牛 start
+$("#orderNo").val(localStorage.orderNo);
+
+
+var fileToken;      //返回的token值
+var fileKey;
+var fileName;
+
+function getUploadToken(){
+//	var fileTypeStr = fileName.substring(fileName.lastIndexOf(".") + 1,fileName.length);
+//	console.log(fileTypeStr);
+	var fileArr = fileName.split(".");
+	var billNameArr = [];
+	billNameArr.push($(".upload_popup .fileDesc").val());
+	billNameArr.push(fileArr[1].toString());
+//	billNameArr.join(".");
+	console.log(billNameArr.join("."));
+
+	//获取token，key需要上传的参数
+	var billData = {
+		uId: AUTOCAR.data_uId,
+		conId: $("#conId").val(),
+		orderNo: $('#orderNo').val(),
+		billType: 8004,
+		billName : billNameArr.join(".")
+	};
+	//发送请求获取token
+	$.ajax({
+		type: "post",
+		url: interface.host + '/vehiclecenter/upLoad/carBillGetToken',
+		cache: false,
+		async: false,
+		data: billData,
+		dataType: "json",
+		error: function (XMLHttpRequest, textStatus, errorThrown) {
+			util.tips.basic(errorThrown);
+		},
+		success: function (info) {
+			fileToken = info.rows[0].token;
+
+			fileKey = info.rows[0].key;
+			console.log(fileKey);
+		}
+	});
+	return fileToken;
+};
+var uploader = Qiniu.uploader({
+
+	runtimes: 'html5,flash,html4',    //上传模式,依次退化
+	browse_button: "uplaodFiles",       //上传选择的点选按钮，**必需**
+	uptoken_func : getUploadToken,       //获取token
+	domain: 'http://7xpx3m.com1.z0.glb.clouddn.com/',   //bucket 域名，下载资源时用到，**必需**
+	get_new_uptoken: true,  //设置上传文件的时候是否每次都重新获取新的token
+	container: "uploadContent",           //上传区域DOM ID，默认是browser_button的父元素，
+	max_file_size: '100mb',           //最大文件体积限制
+	flash_swf_url: 'js/plupload/Moxie.swf',  //引入flash,相对路径
+	max_retries: 3,                   //上传失败最大重试次数
+	chunk_size: '4mb',                //分块上传时，每片的体积
+	auto_start: false,                 //选择文件后自动上传，若关闭需要自己绑定事件触发上传
+	unique_names: false ,
+	save_key: false,
+	init: {
+		'FilesAdded': function (up, files) {
+			fileName = files[0].name;
+			$("#fileName1").text(fileName);
+		},
+		'BeforeUpload': function (up, file) {
+			// 每个文件上传前,处理相关的事情
+			console.log('before');
+
+		},
+		'UploadProgress': function (up, file) {
+			// 每个文件上传时,处理相关的事情
+		},
+		'FileUploaded': function (up, file, info) {
+			alert("1");
+			//urlMsg(AUTOCAR.data_uId, AUTOCAR.data_comId);
+
+		},
+		'Error': function (up, err, errTip) {
+			//上传出错时,处理相关的事情
+			console.log('err');
+		},
+		'UploadComplete': function () {
+			//队列文件处理完毕后,处理相关的事情
+		},
+		'Key': function (up, file) {
+			// 若想在前端对每个文件的key进行个性化处理，可以配置该函数
+			// 该配置必须要在 unique_names: false , save_key: false 时才生效
+			console.log(fileKey);
+			return fileKey;
+		}
+	}
+});
+//已取消并收款状态下七牛上传
+var Q2 = new QiniuJsSDK();
+var uploader2 = Q2.uploader({
+
+	runtimes: 'html5,flash,html4',    //上传模式,依次退化
+	browse_button: "uplaodFilesZJ",       //上传选择的点选按钮，**必需**
+	uptoken_func : getUploadToken,
+	domain: 'http://7xpx3m.com1.z0.glb.clouddn.com/',   //bucket 域名，下载资源时用到，**必需**
+	get_new_uptoken: true,  //设置上传文件的时候是否每次都重新获取新的token
+	container: "uploadContentZJ",           //上传区域DOM ID，默认是browser_button的父元素，
+	max_file_size: '100mb',           //最大文件体积限制
+	flash_swf_url: 'js/plupload/Moxie.swf',  //引入flash,相对路径
+	max_retries: 3,                   //上传失败最大重试次数
+	chunk_size: '4mb',                //分块上传时，每片的体积
+	auto_start: false,                 //选择文件后自动上传，若关闭需要自己绑定事件触发上传
+	unique_names: false ,
+	save_key: false,
+	init: {
+		'FilesAdded': function (up, files) {
+			fileName = files[0].name;
+			$("#fileName2").text(fileName);
+
+		},
+		'BeforeUpload': function (up, file) {
+			// 每个文件上传前,处理相关的事情
+			console.log('before');
+
+		},
+		'UploadProgress': function (up, file) {
+			// 每个文件上传时,处理相关的事情
+		},
+		'FileUploaded': function (up, file, info) {
+			alert("1");
+			//urlMsg(AUTOCAR.data_uId, AUTOCAR.data_comId);
+
+		},
+		'Error': function (up, err, errTip) {
+			//上传出错时,处理相关的事情
+			console.log('err');
+		},
+		'UploadComplete': function () {
+			//队列文件处理完毕后,处理相关的事情
+		},
+		'Key': function (up, file) {
+			// 若想在前端对每个文件的key进行个性化处理，可以配置该函数
+			// 该配置必须要在 unique_names: false , save_key: false 时才生效
+			console.log(fileKey);
+			return fileKey;
+		}
+	}
+});
+
+//uploader.bind('FileUploaded', function() {
+//	console.log('hello man,a file is uploaded');
+//});
+
+//上传票据保存按钮点击
+$(".qiNiu").on('click', function(){
+	//文件描述字数限制
+	if ($(".upload_popup textarea").val().length > 20) {
+		util.tips.basic("文件描述字数不得超过20字");
+	return;
+	} else if ($(".upload_popup textarea").val().length == 0){
+		util.tips.basic("文件描述不得为空");
+		return;
+	}
+//	调用七牛的方法
+	uploader.start();
+	uploader2.start();
+	$(this).parents(".upload_popup").hide();
+});
+
+//七牛end
+
+//点击关闭按钮，关闭弹窗
+$(".upload_popup .upload_close").click(function(){
+	$(this).parents(".upload_popup").hide();
+});
+
+
+//鼠标经过上传票据下载按钮显示提示
+$(".fee_upload").mouseover(function(){
+	$(this).children(".fee_remind").show();
+});
+$(".fee_upload").mouseout(function(){
+	$(this).children(".fee_remind").hide();
+});
+
+//点击上传票据下载按钮
+$(".fee_upload").click(function(){
+//	查询票据
+	var feeData = {
+		uId: AUTOCAR.data_uId,
+		orderNo: $('#orderNo').val()
+	};
+	$.ajax({
+		type: "post",
+		url: interface.host + '/vehiclecenter/carCompany/selectCarBill',
+		cache: false,
+		async: false,
+		data: feeData,
+		dataType: "json",
+		success : function (info){
+			console.log(info);
+			var photoType = "bmp,jpg,jpeg,png,tiff,gif,pcx,tga,exif,fpx,svg,psd,cdr,pcd,dxf,ufo,eps,ai,raw";
+			var photoArr = photoType.split(",");
+			$(".check_popup .content").html("");
+			$.each(info.rows,function(index,item){
+				var html = "";
+//				var item.billName.split(".");
+				var fileTypeStr = item.billName.substring(item.billName.lastIndexOf(".") + 1,item.billName.length);
+				for (var i = 0; i < photoArr.length; i++) {
+					if (fileTypeStr == photoArr[i]) {
+						html += '<div>' +
+								'<input type="hidden" value="'+ item.billUrl +'">'+
+								'<a href="#" class="checkPhoto">' +
+								'<span class="feeIcon"></span>' +
+								 item.billName +'</a>'+
+								'</div>';
+
+					}
+				}
+				if (html == "") {
+					html += '<div>' +
+							'<a download href="'+ item.billUrl +'">' +
+							'<span class="feeIcon"></span>' +
+									item.billName +
+							'</a>'+
+
+							'</div>';
+				}
+
+				$(".check_popup .content").append(html);
+
+
+			})
+		}
+	});
+
+	$(".check_popup").show();
+	//点击图片的文件名查看图片
+	$(".check_popup").delegate(".checkPhoto","click",function(){
+//		var imgUrl = $(this).siblings("input[type=hidden]").val();
+//		console.log(imgUrl);
+		var _this = $(this);
+		console.log($(".img_popup img"));
+		$(".img_popup img").attr("src",function(){
+			var imgUrl = _this.siblings("input[type=hidden]").val();
+						console.log(imgUrl);
+
+			return imgUrl;
+		});
+		$(".img_popup").show();
+//		点击关闭按钮图片关闭
+		$(".img_popup .img_popup_close").click(function(){
+			$(this).parents(".img_popup").hide();
+		});
+	});
+
+});
+//点击查看关闭按钮，关闭弹窗
+$(".check_popup .check_close").click(function(){
+	$(this).parents(".check_popup").hide();
+});
+
+//    点击收费标准，显示收费标准信息
+$(".affirm_order_bottom .fee_scale").click(function(){
+	var _this = $(this);
+	if (_this.children("i").hasClass("circle_arrow_right")) {
+		_this.siblings("#feeStandard").show();
+	} else {
+		_this.siblings("#feeStandard").hide();
+	}
+});
+$(function(){
+	//	点击需求描述显示或隐藏内容
+//		debugger;
+	$(".use_car #showAll").click(function(){
+		var _this = $(this);
+		if (_this.text() == "展开") {
+			_this.parent().siblings("#requirementDesc").removeClass("requirement_esc");
+			_this.text("收起");
+		} else if (_this.text() == "收起") {
+			_this.parent().siblings("#requirementDesc").addClass("requirement_esc");
+			_this.text("展开");
+		}
+	});
+
+//点击其他说明显示或隐藏内容
+	$("#revertControl #otherAll").click(function(){
+		var _this = $(this);
+		if (_this.text() == "展开") {
+			_this.parent().siblings("#otherDesc").removeClass("other_desc");
+			_this.text("收起");
+		} else if (_this.text() == "收起") {
+			_this.parent().siblings("#otherDesc").addClass("other_desc");
+			_this.text("展开");
+		}
+	});
+//	获取文字宽度的方法
+	function  getWidth (dom) {
+		var text = $(dom).text();
+		var val = text.replace(/[^0-9]/g,"");
+		var b = text.replace(/[^a-z]/g,"");
+		//	说明中数字与字母的个数
+		var otherNum = val.length + b.length;
+		//	console.log(otherNum);
+		//说明中文字的个数
+		var textNum = text.length - otherNum;
+		//	console.log(otherTextNum);
+		//	说明总体的宽度
+		return textNum * 16 +　otherNum / 2 * 16　;
+
+	}
+////	根据需求描述文字决定是否显示或隐藏展开
+	if (getWidth("#requirementDesc") < $("#requirementDesc").width() || $("#requirementDesc").text().length == 0) {
+		$("#showAll").hide();
+	} else {
+		$("#showAll").show();
+	}
+////	根据其他说明文字决定是否显示或隐藏展开
+//	console.log(getWidth("#otherDesc"));
+	if (getWidth("#otherDesc") < $("#otherDesc").width() || $("#otherDesc").text().length == 0) {
+		$("#otherAll").hide();
+	} else {
+		$("#otherAll").show();
+	}
+
+
+})
+
+</script>
+</body>
+</html>

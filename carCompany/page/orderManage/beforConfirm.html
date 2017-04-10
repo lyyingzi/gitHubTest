@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+    <title>待确认订单</title>
+    <meta name="author" content="hexiaobao"/>
+    <link rel="stylesheet" type="text/css" href="../css/base.css" />
+    <link rel="stylesheet" type="text/css" href="../css/common.css">
+    <link rel="stylesheet" type="text/css" href="../css/orderManage.css">
+    <link rel="stylesheet" type="text/css" href="../css/jquery-ui.min.css">
+	<link rel="stylesheet" type="text/css"  href="../js/skin/jedate.css">
+</head>
+
+<body>
+<!--header start-->
+<div class="header_car_bg">
+</div>
+<!--header end-->
+
+<!--body start-->
+<div class="nav_wrap bg_array01">
+    <div class="nav_bread font-array02  center">当前位置：<span>订单管理</span>>订单</div>
+    <!-- 6个tag-->
+    <div class="nav_main center">
+    </div>
+    <!-- serch-->
+    <div class="search_wrap affirm_search">
+        <div class="search_main">
+            <div class="search_input fl">
+                <div class="fl">
+                    <span class="mleft7">订单号：</span><span id="orderNo"></span>
+                    <span class="mleft130">发送人：</span>
+                    <span class="mright15" id="sendComName"></span>
+                    <span class="mright15" id="sendUserName"></span>
+                    <span class="mright15" id="sendUserPhone"></span>
+                </div>
+                <div class="clear"></div>
+            </div>
+        </div>
+        <div class="clear"></div>
+    </div>
+    <!-- progress bar-->
+    <div class="list_content c">
+        <div class="order_status">
+            <p class="order_title">
+            </p>
+            <p class="progress_bar">
+            </p>
+        </div>
+    </div>
+
+    <!--content -->
+    <!--po单弹窗-->
+    <div class="po_popup popup">
+        <div class="shade"></div>
+        <span class="po_close"></span>
+        <span class="po" id="poDan" style="">
+
+            <div id="poDan" style="float:left">
+            </div>
+        </span>
+        <div style="clear:both">
+        </div>
+    </div>
+    <div class="account_wrap center">
+        <div class="c">
+            <div class="meeting_info">
+                <ul>
+                    <li><span class="content_mark">会议名称</span><span id="conName" class="requirement_esc"></span></li>
+                    <li><span class="content_mark">会议编码</span><span id="conCode"></span></li>
+                    <li id="poDanLi"><span class="content_mark">会议po单</span>
+                        <div class="po_file">
+
+                        </div>
+					</li>
+                    <li id="poDanAmount"><span class="content_mark">PO单限额</span><span id="poPrice"></span>元</li>
+                </ul>
+            </div>
+            <div class="total_money">
+                <div class="total_money_top">
+                    <span class="total_money_img"></span>
+                    <span class="total_money_title">订单总费用预算</span>
+                </div>
+                <ul class="total_money_bottom">
+                    <li><span class="content_mark">总计金额</span><span id="sendAmount"></span>元</li>
+                </ul>
+            </div>
+            <div class="use_car">
+                <div class="use_car_top">
+                    <span class="use_car_img"></span>
+                    <span class="use_car_title">用车</span>
+                </div>
+                <ul class="use-car-bottom">
+					<input type="hidden" id="useCarType"></input>
+                    <li><span class="content_mark">用车方式</span><span id="useCarDesc"></span></li>
+                    <li><span class="content_mark">用车时间</span><span id="useCarTime"></span></li>
+					<li id = "bc_carTypeDescLi"><span class="content_mark">包车方式</span><span id="bc_carTypeDesc"></span></li>
+                    <li><span class="content_mark">上车地点</span><span id="startAddress"></span></li>
+                    <li id = "endAddressLi"><span class="content_mark">下车地点</span><span id="endAddress"></span></li>
+                    <li><span class="content_mark">车型选择</span><span id="carTypeDesc"></span></li>
+                    <li><span class="content_mark">座位数量</span><span id="seatCount"></span></li>
+                    <li class="total_amount_main"><span class="content_mark">可选车型</span><span id="vehicleModelName"></span>
+						<!--<span class="mleft60 font_yellow include_more" role="car-info-more">车型描述<i class="circle_arrow_right"></i></span>-->
+						<span class="mleft60 font_yellow include_more" role="car-info-more">车型描述</span>
+						<span class="text_pop_array car_info_more_pos line-height20" role="car-info-more-pos"><p id="vehicleModelDesc" class="line-height24"></p></span>
+					</li>
+                    <li id="amountControl"><span class="content_mark">总计金额</span><span id="amount"></span>元</li>
+                    <li><span class="content_mark">乘车人姓名</span><span id="passengeName"></span></li>
+                    <li><span class="content_mark">乘车人电话</span><span id="passengePhone"></span></li>
+                    <!--<li><span class="content_mark">需求描述</span><span id="requirementDesc"></span></li>-->
+                </ul>
+                <div class="" style="padding-right: 30px;padding-left:42px;font-size:16px;">
+                    <span class="content_mark" style="float:left">需求描述</span><p id="requirementDesc" class="requirement_esc" style="margin-left:95px"></p>
+                    <div class="clear"></div>
+                    <div style="text-align:right;padding-bottom: 10px;">
+                        <span style="cursor: pointer;color:#FFAF24" id="showAll">展开</span>
+                    </div>
+                </div>
+            </div>
+            <div class="affirm_order updateOrder" id= "sendOrderDiv">
+                <div class="affirm_order_top" id="confirmControl">
+                    <span class="affirm_order_img"></span>
+                    <span class="affirm_order_title" id="confirmContext">确认订单</span>
+                </div>
+                <ul class="affirm_order_bottom">
+                    <li>
+                        <dt class="reply_inquiry_detial_label">确认预订</dt>
+                        <dd class="reply_inquiry_detial_value">
+                            <span class="btn_limit_array btn_limit_yellow_selected" role="reply-inquiry-enabled" value="01">确认</span>
+                            <span class="btn_limit_array mleft15" role="reply-inquiry-disabled" value="00">取消</span>
+                        </dd>
+                    </li>
+                    <li>
+                        <dt class="reply_inquiry_detial_label">取消时限</dt>
+                        <dd class="reply_inquiry_detial_value">
+                            <input class=" date-input-long text_input_date_long" id="stopTime" type="text" placeholder="用户可在取消时限前取消订单" value=""  />
+                        </dd>
+                    </li>
+                    <li>
+                        <dt class="reply_inquiry_detial_label">司机姓名</dt>
+                        <dd class="reply_inquiry_detial_value">
+                            <input type="text" class="long_text_input" id="driverName">
+                        </dd>
+                    </li>
+                    <li>
+                        <dt class="reply_inquiry_detial_label">司机电话</dt>
+                        <dd class="reply_inquiry_detial_value">
+                            <input type="text" class="long_text_input" id="driverPhone">
+                        </dd>
+                    </li>
+                    <li>
+                        <dt class="reply_inquiry_detial_label">车牌号码</dt>
+                        <dd class="reply_inquiry_detial_value">
+                            <input type="text" class="long_text_input" id="vehicleNo">
+                        </dd>
+                    </li>
+					<li id="vehicleModelControl" style="display:none;">
+						<!--<dl class="reply_inquiry_detial">-->
+
+							<dt class="reply_inquiry_detial_label">可选车型</dt>
+							<dd class="reply_inquiry_detial_value">
+								<select class="car_common_select select_cont" id="vehicleModel" style="height:35px;width: 130px">
+								</select>
+							</dd>
+						<!--</dl>-->
+					</li>
+                    <li>
+						<!--<dl class="reply_inquiry_detial">-->
+						<dl class="">
+							<dt class="reply_inquiry_detial_label">总计金额</dt>
+							<dd class="reply_inquiry_detial_value total_amount_main">
+								<div>
+								<input type="text" class="short_text_input" id="totalAmount" placeholder="总计金额">
+								<span class="mleft5">元</span>                
+								<span class="mleft60 font_yellow include_more" role="include-more1">报价包含 <i class="circle_arrow_right"></i></span>
+								<span class="text_pop text_pop_yellow include_more_pos line-height20" role="include-more-pos">输入详细报价，最多三项</span>
+								</div>
+								
+								<div class="add_amount_main" style = "display:block">
+									<span class="add_btn_yellow_limit" id="inquiryAddItem">添加项目</span>
+									<div class="add_amount_cont" >
+									</div>
+								</div>
+							</dd>
+						</dl>
+                    </li>
+                    <li >
+                        <dt class="reply_inquiry_detial_label">其他说明</dt>
+                        <dd class="reply_inquiry_detial_value">
+                            <textarea name="" cols="" rows=" " id="otherInfo" class="short_text_textarea"></textarea>
+                            <div></div>
+                        </dd>
+                    </li>
+                    <div class="clear"></div>
+                </ul>
+            </div>
+			
+			<div class="affirm_order cancleOrder">
+                <div class="affirm_order_top">
+                    <span class="affirm_order_img"></span>
+                    <span class="affirm_order_title">取消订单</span>
+                </div>
+                <ul class="affirm_order_bottom">
+                    <li>
+                        <dt class="reply_inquiry_detial_label">取消时限</dt>
+                        <dd class="reply_inquiry_detial_value">
+                            <span id="cancleStopTime"><span>
+                        </dd>
+                    </li>
+					<li>
+                        <dt class="reply_inquiry_detial_label">追加扣款</dt>
+                        <dd class="reply_inquiry_detial_value total_amount_main">
+                            <div>
+                                <input type="text" class="short_text_input" id="extraCost">
+                                <span class="mleft5">元</span>
+                            </div>
+                        </dd>
+                    </li>
+                    <li>
+                        <dt class="reply_inquiry_detial_label">司机姓名</dt>
+                        <dd class="reply_inquiry_detial_value">
+                            <span id="cancleDriverName"></span>
+                        </dd>
+                    </li>
+                    <li>
+                        <dt class="reply_inquiry_detial_label">司机电话</dt>
+                        <dd class="reply_inquiry_detial_value">
+                            <span id="cancleDriverPhone"></span>
+                        </dd>
+                    </li>
+                    <li>
+                        <dt class="reply_inquiry_detial_label">车牌号码</dt>
+                        <dd class="reply_inquiry_detial_value">
+                            <span id="cancleVehicleNo"></span>
+                        </dd>
+                    </li>
+                    <li>
+                        <dt class="reply_inquiry_detial_label">总计金额</dt>
+                        <dd class="reply_inquiry_detial_value total_amount_main">
+                            <div>
+                                <span id="cancleTotalAmount"></span>
+                                <span class="mleft5">元</span>
+                            </div>
+							<div id="quotePrice" style="position:absolute">
+
+							</div>
+                        </dd>
+                    </li>
+                    <li >
+                        <dt class="reply_inquiry_detial_label">其他说明</dt>
+                        <dd class="reply_inquiry_detial_value">
+                            <textarea name="" cols="" rows=" " id="cancleOtherInfo" class="short_text_textarea"></textarea>
+                            <div></div>
+                        </dd>
+                    </li>
+                    <div class="clear"></div>
+                </ul>
+            </div>
+            <div class="replay_button" id="replyButton" style="display:none;">
+                <button class="send_replay" role="order-reply-btn" id = "sendOrder">发送回复</button>
+                <button class="cancle" role="close-order-reply-btn">返回</button>
+            </div>
+			<div class="replay_button" id="cancelButton" style="display:none;">
+                <button class="send_replay" id = "cancelConfirm">确认取消</button>
+                <button class="send_replay" id="cancelQuit">放弃取消</button>
+            </div>
+        </div>
+        <!-- right-nav-->
+
+
+    </div>
+</div>
+<!--body end-->
+
+<!--footer start-->
+<div class="footer_car_bg bg_blue">
+    <div class="footer_car center bg_blue">
+        <div class="about_us_car">
+            <span class="span_right"><a href="#">意见反馈</a></span>
+            <span class="span_right"><a href="#">关于我们</a></span>
+            <span class=""><a href="#">联系我们</a></span>
+            <div class="imice_logo_main mtop20">
+                <div class="imice_logo fl mleft60"></div>
+                <div class="fl mleft40">
+                    <p class=" align-center line-height40">客服热线：010-57074011</p>
+                    <p class="align-center">服务邮箱：wemeeting@i-mice.cn</p>
+                </div>
+            </div>
+        </div>
+        <div class=" align-center font-array01 copy_right_car">京ICP备16027591号-2&nbsp;&nbsp;|&nbsp;&nbsp;中青博联整合营销顾问股份有限公司&nbsp; &nbsp;北京爱麦思科技有限公司</div>
+    </div>
+</div>
+<!--footer end-->
+
+<!--right_nav 右侧导航-->
+<div class="right_nav">
+</div>
+
+<script type="text/javascript" src="../js/jquery-3.1.1.min.js"></script>
+<script type="text/javascript" src="../js/jquery-ui.min.js"></script>
+<script type="text/javascript" src="../js/jquery.page.js"></script>
+<script type="text/javascript" src="../js/common.js"></script>
+<script type="text/javascript" src="../js/interface.js"></script>
+<script type="text/javascript" src="../js/util.js"></script>
+<script type="text/javascript" src="../js/handle.js"></script>
+<script type="text/javascript" src="../js/orderManagement.js"></script>
+<script type="text/javascript" src="../js/qiniushow.js"></script>
+<script type="text/javascript" src="../js/jquery.jedate.js"></script>
+
+<script>
+
+    //点击po单图标，显示弹窗
+    $(".meeting_info .po_file").click(function(){
+        $(this).parents("").siblings(".po_popup").show();
+    });
+    //点击关闭按钮，弹框关闭
+    $(".po_popup .po_close").click(function(){
+        $(this).parents(".po_popup").hide();
+    });
+    $(function(){
+		orderManagement.orderDetail(localStorage.orderNo,localStorage.state);
+    });
+	
+	$("#sendOrder").click(function(){
+		orderManagement.revertOrder(localStorage.orderNo,localStorage.state);
+	});
+//    取消订单回首页
+    $("button[role='close-order-reply-btn']").on("click", function () {
+        window.history.go(-1);
+    });
+	//确认取消
+	$("#cancelConfirm").click(function(){
+		orderManagement.revertOrder(localStorage.orderNo,localStorage.state);
+	});
+	  //放弃取消
+    $("#cancelQuit").on("click", function () {
+        window.history.go(-1);
+    });
+	
+	$("#stopTime").jeDate({
+		skinCell:"jedateorange",
+		isClear :true,
+		isToday :false,
+		minDate:util.nowFormatDate(),
+		format:"YYYY-MM-DD hh:mm",
+	});
+
+//    $(document).ajaxStop(function(){
+    $(function(){
+
+
+        //	点击需求描述显示或隐藏内容
+        $(".use_car #showAll").click(function(){
+            var _this = $(this);
+            if (_this.text() == "展开") {
+                _this.parent().siblings("#requirementDesc").removeClass("requirement_esc");
+                _this.text("收起");
+            } else if (_this.text() == "收起") {
+                _this.parent().siblings("#requirementDesc").addClass("requirement_esc");
+                _this.text("展开");
+            }
+        });
+        ////	根据需求描述文字决定是否显示或隐藏展开
+        if (orderManagement.getWidth("#requirementDesc") < $("#requirementDesc").width() || $("#requirementDesc").text().length == 0) {
+            $("#showAll").hide();
+        } else {
+            $("#showAll").show();
+        }
+    });
+</script>
+
+</body>
+</html>

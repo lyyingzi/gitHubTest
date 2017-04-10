@@ -1,0 +1,152 @@
+﻿/*客户服务start*/
+.cust_service {
+    padding-bottom: 500px;
+}
+.cust_service .use_car_main  .section_title .ico_service {
+    height: 40px;
+    line-height: 40px;
+    background: url(../img/icon_title_service.png)  0 0 no-repeat;
+    padding-left:60px;
+    font-size:16px;
+}
+
+
+
+.font_blue {
+    color:#373189;
+}
+/*客户服务end*/
+
+/*联系我们start*/
+.contact_us {
+    padding-bottom: 400px;
+}
+.use_car_main ul {
+    width: 510px;
+    float:left;
+}
+.contact_us  .use_car_main p {
+    line-height: 48px;
+}
+.contact_us  .use_car_main ul li {
+    line-height: 48px;
+}
+/*联系我们end*/
+
+
+/*关于我们start*/
+.aboutme p {
+    width: 1110px;
+    line-height: 26px;
+    margin-bottom: 30px;
+}
+.aboutme {
+    padding-bottom: 390px;
+}
+/*关于我们end*/
+
+/*意见反馈start*/
+.feedback .use_car_main  .section_title .ico_service {
+    height: 40px;
+    line-height: 40px;
+    background: url(../img/icon_title_service.png)  0 -50px no-repeat;
+    padding-left:60px;
+    font-size:16px;
+}
+.mtop {
+    margin-top:30px;
+}
+.feedback .use_car_main .left {
+    margin-left:350px;
+}
+.feedback .use_car_main div{
+    margin-bottom:20px;
+}
+.feedback .use_car_main div span {
+    display: inline-block;
+    width: 94px;
+    line-height: 30px;
+}
+.feedback .use_car_main div textarea {
+    width: 40%;
+    height: 70px;
+    vertical-align: middle;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    border-radius: 10px;
+}
+.feedback .use_car_main  input {
+    
+}
+.feedback .use_car_main div .renovate_icon {
+    display: inline-block;
+    width: 17px;
+    height: 17px;
+    background:url(../img/renovate_icon.png) no-repeat;
+    position:relative;
+    top:4px;
+    margin:0 5px;
+}
+.feedback .use_car_main div .input_code {
+    width: 200px;
+    margin-right: 20px;
+}
+.feedback .use_car_main div .change {
+    width: 130px;
+}
+.feedback .use_car_main .code {
+    width: 86px;
+    height: 34px;
+    border:1px solid #FFAF24;
+    background-color: #fff;
+    text-align: center;
+    font-size: 16px;
+}
+.feedback .use_car_main  .contact_info {
+    margin-left:94px;
+    /*margin-top: 60px;*/
+    line-height: 50px;
+}
+.feedback .use_car_main  .contact_info span{
+    width: 230px;
+}
+.btn {
+    text-align:center;
+	margin:20px 0;
+
+}
+.btn [type='button']{
+    width: 200px;
+    height: 60px;
+    font-size:18px;
+    border:0 none;
+    
+    color:#fff;
+}
+.feedback .save {
+    background-color: #FFAF24;
+}
+/*意见反馈end*/
+
+/*x修改密码start*/
+.modify_pass .use_car_main  input {
+   width: 295px;
+    height: 36px;
+    border:1px solid #d9d9d9;
+	 background-color: #fff;
+	
+    padding-left:5px;
+    font-size: 16px;
+	
+	
+}
+.modify_pass .use_car_main  input.text_input_error{border: 1px solid #F00;}
+.modify_pass .btn .confirm {
+    background-color: #FFAF24;
+    margin-right:260px;
+}
+.modify_pass .btn .cancel {
+    background-color: #bbbbbb;
+}
+
+/*x修改密码end*/

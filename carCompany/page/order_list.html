@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>导航栏</title>
+<meta name="author" content="quyun@bravolinks.cn" />
+<link rel="stylesheet" type="text/css" href="css/base.css" />
+<link rel="stylesheet" type="text/css" href="css/common.css">
+<script src="js/jquery-1.11.1.min.js"></script>
+</head>
+
+<body>
+<!--header start-->
+<div class="header_car_bg">
+	<div class="header_car center">
+    	<div class="header_logo_main">
+        	<a href="#"><img class="header_logo" src="img/com_logo.png" width="103" height="102"></a>
+            <span class="com_name">假日酒店,您好,欢迎登录WeMeeting</span>
+            <div class="clear"></div>
+        </div>
+    	
+        <div class="header_car_alarm">
+        	<span>2016年12月09日 16:33:55 星期五</span>
+            	<i class="icon_car_alarm"></i>
+           <div class="car_message">8</div>     
+        </div>
+        <a class="logout">退出登录</a>
+        <a class="logoin_pwd" >修改密码</a>
+        
+        	
+     </div>
+</div>
+<!--header end-->
+
+<div class="nav_wrap bg_array01">
+  <div class="nav_bread font-array02  center">当前位置：询价单管理 &gt; 询价单</div>
+  <div class="nav_main center">
+    <!--<ul class="nav_list" role="nav-container-main">
+      <li style="margin-left:0px;"><i class="meeting-manage"></i><span>会议管理</span></li>
+      <li><i class="demand-manage"></i><span>需求单管理</span></li>
+      <li class="nav_selected" ><i class="inquiry-manage"></i><span>询价单管理</span></li>
+      <li><i class="order-manage"></i><span>订单管理</span></li>
+      <li><i class="addtional-manage"></i><span>补录账单管理</span></li>
+      <li><i class="dataStatistics"></i><span>数据统计</span></li>
+      <li><i class="accounts-manage"></i><span>账号及权限管理</span></li>
+      <li><i class="customerService"></i><span>客户服务</span></li>
+    </ul>-->
+    <!--6个tag-->
+    <ul class="nav_list_short" role="nav-container-main">
+      <li class="nav_selected" style="margin-left:0px;"><i class="inquiry-manage"></i><span>询价单管理</span></li>
+      <li><i class="order-manage"></i><span>订单管理</span></li>
+      <li><i class="settingBill"></i><span>结算账单</span></li>
+      <li><i class="infoMaintain"></i><span>信息维护</span></li>
+      <li><i class="accounts-manage"></i><span>账号及权限管理</span></li>
+      <li><i class="customerService"></i><span>客户服务</span></li>
+    </ul>
+    
+  </div>
+  <div class="order_list_main center  mtop35">
+  	<div class="fl">
+    <span>询价单号：</span><span id="orderNum">XJ123456789</span>
+    </div>
+    <div class="fl  sender_name">
+    <span>发送人：</span><span>中青旅</span><span class="mleft10" id="senderName">程建莹</span><span class="mleft10" id="phoneNumber">181000000</span>
+    </div>
+  </div>
+  
+  <div class="list_content center">
+  	<div class="mtop15"> 
+    	<p>
+            <span>客户已询价</span>
+            <span>已回复报价</span>
+            <span>客户已提交预定</span>
+        </p>
+        <p class="progress_bar">
+        	<span class="round"></span>
+            <span class="line"></span>
+        </p>
+    </div>
+  </div>
+  
+  <div class="account_wrap mtop35">
+    <div class="account-main center" style="min-height:400px;">
+      <table width="100%" border="0" cellpadding="0" cellspacing="0" class="account_table ">
+      	<thead>
+          <tr class="dark-bg center-tr font-bold">
+            <td>会议名称</td>
+            <td>会议编码</td>
+            <td>办会城市</td>
+            <td>会议开始时间</td>
+            <td>会议创建人</td>
+            <td>会议资源</td>
+            <td>会议创建时间</td>
+            <td>会议状态</td>
+            <td>操作</td>
+          </tr>
+       	</thead>
+       	<tbody>
+		  <tr>
+            <td>小微会议</td>
+            <td>HY123456789</td>
+            <td>北京</td>
+            <td>2015年10月30日</td>
+            <td>创建人</td>
+            <td>会场、餐厅、客房</td>
+            <td>2015-12-15 13:00</td>
+            <td>已创建</td>
+            <td><a class="operate_btn" href="javascript:void(0);" style="margin-left:0px;">查看</a><a href="javascript:void(0);" class="operate_btn">删除</a></td>
+          </tr>
+          <tr>
+            <td>小微会议</td>
+            <td>HY123456789</td>
+            <td>北京</td>
+            <td>2015年10月30日</td>
+            <td>创建人</td>
+            <td>会场、餐厅、客房</td>
+            <td>2015-12-15 13:00</td>
+            <td>已创建</td>
+            <td><a href="javascript:void(0);" class="operate_btn" style="margin-left:0px;">查看</a><a href="javascript:void(0);" class="operate_btn">删除</a></td>
+          </tr>
+          <tr>
+            <td>小微会议</td>
+            <td>HY123456789</td>
+            <td>北京</td>
+            <td>2015年10月30日</td>
+            <td>创建人</td>
+            <td>会场、餐厅、客房</td>
+            <td>2015-12-15 13:00</td>
+            <td>已创建</td>
+            <td><a href="javascript:void(0);" class="operate_btn" style="margin-left:0px;">查看</a><a href="javascript:void(0);" class="operate_btn">删除</a></td>
+          </tr>
+          <tr>
+            <td>小微会议</td>
+            <td>HY123456789</td>
+            <td>北京</td>
+            <td>2015年10月30日</td>
+            <td>创建人</td>
+            <td>会场、餐厅、客房</td>
+            <td>2015-12-15 13:00</td>
+            <td>已创建</td>
+            <td><a href="javascript:void(0);" class="operate_btn" style="margin-left:0px;">查看</a><a href="javascript:void(0);" class="operate_btn">删除</a></td>
+          </tr>
+          <tr>
+            <td>小微会议</td>
+            <td>HY123456789</td>
+            <td>北京</td>
+            <td>2015年10月30日</td>
+            <td>创建人</td>
+            <td>会场、餐厅、客房</td>
+            <td>2015-12-15 13:00</td>
+            <td>已创建</td>
+            <td><a href="javascript:void(0);" class="operate_btn" style="margin-left:0px;">查看</a><a href="javascript:void(0);" class="operate_btn">删除</a></td>
+          </tr>
+      	</tbody>
+          
+      </table>
+
+    </div>
+  </div>
+</div>
+
+<!--footer start-->
+<div class="footer_car_bg bg_blue">
+	<div class="footer_car center bg_blue">
+    	<div class="about_us_car">
+            <span class="span_right"><a href="#">意见反馈</a></span>
+            <span class="span_right"><a href="#">关于我们</a></span>
+            <span class=""><a href="#">联系我们</a></span>
+            <div class="imice_logo_main mtop20">
+                <div class="imice_logo fl mleft60"></div>
+                <div class="fl mleft40">
+                <p class=" align-center line-height40">客服热线：010-57074011</p>
+                <p class="align-center">服务邮箱：wemeeting@i-mice.cn</p>
+                </div> 
+        </div>
+    </div>
+        <div class=" align-center font-array01 copy_right_car">京ICP备16027591号-2&nbsp;&nbsp;|&nbsp;&nbsp;中青博联整合营销顾问股份有限公司&nbsp; &nbsp;北京爱麦思科技有限公司</div>
+</div>
+</div>
+<!--footer end-->
+
+<script>
+$(document).ready(function(){
+	
+	$("body").delegate("ul[role='nav-container-main'] li", "click", function () {	
+		var _this = $(this);
+		_this.addClass("nav_selected").siblings().removeClass("nav_selected");
+		
+        });
+    
+});
+	
+</script>
+<script>
+$("body").delegate(".search_more_arrow", "click", function(){
+	
+      var _this = $(this);
+	  var _thisicon = _this.children();
+      var _next = _this.next(".search_select_main");
+      if(_thisicon.hasClass("circle_arrow_down")){
+        _next.show();
+        _thisicon.removeClass("circle_arrow_down");
+		_thisicon.addClass("circle_arrow_up");
+      }else{
+        _next.hide();
+        _thisicon.addClass("circle_arrow_down");
+      }
+
+});
+
+$("body").delegate(".checkbox", "click", function(){//
+	  var _this = $(this);
+	  var _thisBtn = $(".search_btn");
+	  var _thisHeight = $(".search_btn").height();
+	  var _searchMain = $(".search_main");
+	  var _searchHeight = $(".search_main").height();
+	  
+	  _this.each(function () {
+		  //console.log("你好" + _this.index());
+		  if( _this.hasClass('selected') == false && _this.attr('option') == _this.index()  && _searchHeight == 70){
+			_this.addClass('selected');
+			$("span[role='smoption_"+_this.index()+"']").show();	//
+			$("input[role='smoption_"+_this.index()+"']").show();
+
+			$(".search_btn").height(_thisHeight + 44);
+
+			}
+			else if( _this.hasClass('selected') == false && _this.attr('option') == _this.index()  && _searchHeight > 70){
+				_this.addClass('selected');
+				//$("span[role='smoption_0']").show();
+				//$("input[role='smoption_0']").show();
+				$("span[role='smoption_"+_this.index()+"']").show();
+				$("input[role='smoption_"+_this.index()+"']").show();
+			}
+			else if( _this.hasClass('selected') == true && _this.attr('option') == _this.index()  && _searchHeight == 70) {
+				_this.removeClass('selected');
+				$("span[role='smoption_"+_this.index()+"']").hide();
+				$("input[role='smoption_"+_this.index()+"']").hide();
+			}
+			else if( _this.hasClass('selected') == true && _this.attr('option') == _this.index()  && _searchHeight > 70) {
+				_this.removeClass('selected');
+				$("span[role='smoption_"+_this.index()+"']").hide();
+				$("input[role='smoption_"+_this.index()+"']").hide();
+			}
+			
+			if( _this.hasClass('selected') == false && _this.attr('option') !== '0' && _this.attr('option') !== '1' && _this.attr('option') !== '2' && _this.attr('option') !== '3' && _thisHeight > 70  && _searchHeight > 70){
+			_this.removeClass('selected');
+			$("span[role='smoption_"+_this.index()+"']").hide();
+			
+			$(".search_btn").height(_thisHeight - 44);
+			}
+			
+			if($(".search_select_main li.selected").length == 0){
+					$(".search_btn").height(70);
+					$(".content_more").hide();
+			}
+			else{
+				$(".content_more").show();
+			}
+			
+		  
+	  });  
+	  
+});
+</script>
+<!--<script>
+$("body").delegate(".search_more_arrow", "click", function(){
+	
+      var _this = $(this);
+	  var _thisicon = _this.children();
+      var _next = _this.next(".search_select_main");
+      if(_thisicon.hasClass("circle_arrow_down")){
+        _next.show();
+        _thisicon.removeClass("circle_arrow_down");
+		_thisicon.addClass("circle_arrow_up");
+      }else{
+        _next.hide();
+        _thisicon.addClass("circle_arrow_down");
+      }
+
+});
+
+$("body").delegate(".checkbox", "click", function(){//程序有待优化
+	  var _this = $(this);
+	  var _thisBtn = $(".search_btn");
+	  var _thisHeight = $(".search_btn").height();
+	  var _searchMain = $(".search_main");
+	  var _searchHeight = $(".search_main").height();
+	  
+		
+	  
+	  if( _this.hasClass('selected') == false && _this.attr('option') == '0'  && _searchHeight == 70){
+			_this.addClass('selected');
+			$("span[role='smoption_0']").show();
+			$("input[role='smoption_0']").show();
+			//$(".content_more").show();
+			
+			$(".search_btn").height(_thisHeight + 34);
+			
+			
+	  }
+	  else if( _this.hasClass('selected') == false && _this.attr('option') == '0'  && _searchHeight > 70){
+			_this.addClass('selected');
+			$("span[role='smoption_0']").show();
+			$("input[role='smoption_0']").show();
+			//$(".content_more").show();
+			//$(".search_btn").height(_thisHeight + 34);
+
+			
+	  }
+	  else if( _this.hasClass('selected') == true && _this.attr('option') == '0'  && _searchHeight == 70) {
+			_this.removeClass('selected');
+			$("span[role='smoption_0']").hide();
+			$("input[role='smoption_0']").hide();
+			//$(".content_more").hide();
+			//_thisHeight = _thisHeight + 34;
+			//$(".search_btn").height(_thisHeight - 34);
+	  }
+	  else if( _this.hasClass('selected') == true && _this.attr('option') == '0'  && _searchHeight > 70) {
+			_this.removeClass('selected');
+			$("span[role='smoption_0']").hide();
+			$("input[role='smoption_0']").hide();
+			//$(".content_more").hide();
+			//_thisHeight = _thisHeight + 34;
+			//$(".search_btn").height(_thisHeight - 34);
+	  }
+	  
+	  
+	  
+	  if( _this.hasClass('selected') == false && _this.attr('option') == '1' && _searchHeight == 70){
+			_this.addClass('selected');
+			$("span[role='smoption_1']").show();
+			$("input[role='smoption_1']").show();
+			//$(".content_more").show();
+			//_thisHeight = _thisHeight + 34;
+			$(".search_btn").height(_thisHeight + 34);
+	  }
+	  else if( _this.hasClass('selected') == false && _this.attr('option') == '1' && _searchHeight > 70){
+			_this.addClass('selected');
+			$("span[role='smoption_1']").show();
+			$("input[role='smoption_1']").show();
+			//$(".content_more").show();
+			//_thisHeight = _thisHeight + 34;
+			//$(".search_btn").height(_thisHeight + 34);
+	  }
+	  else if( _this.hasClass('selected') == true && _this.attr('option') == '1'  && _searchHeight == 70) {
+			_this.removeClass('selected');
+			$("span[role='smoption_1']").hide();
+			$("input[role='smoption_1']").hide();
+			//$(".content_more").hide();
+			//_thisHeight = _thisHeight + 34;
+			//$(".search_btn").height(_thisHeight - 34);
+	  }
+	  else if( _this.hasClass('selected') == true && _this.attr('option') == '1'  && _searchHeight > 70) {
+			_this.removeClass('selected');
+			$("span[role='smoption_1']").hide();
+			$("input[role='smoption_1']").hide();
+			//$(".content_more").hide();
+			//_thisHeight = _thisHeight + 34;
+			//$(".search_btn").height(_thisHeight - 34);
+	  }
+	  
+	  
+	  if( _this.hasClass('selected') == false && _this.attr('option') == '2'  && _searchHeight == 70){
+			_this.addClass('selected');
+			$("span[role='smoption_2']").show();
+			$("input[role='smoption_2']").show();
+			//$(".content_more").show();
+			//_thisHeight = _thisHeight + 34;
+			$(".search_btn").height(_thisHeight + 34);
+	  }
+	  else if( _this.hasClass('selected') == false && _this.attr('option') == '2'  && _searchHeight > 70){
+			_this.addClass('selected');
+			$("span[role='smoption_2']").show();
+			$("input[role='smoption_2']").show();
+			//$(".content_more").show();
+			//_thisHeight = _thisHeight + 34;
+			//$(".search_btn").height(_thisHeight + 34);
+	  }
+	  else if( _this.hasClass('selected') == true && _this.attr('option') == '2'  && _searchHeight == 70) {
+			_this.removeClass('selected');
+			$("span[role='smoption_2']").hide();
+			$("input[role='smoption_2']").hide();
+			//$(".content_more").hide();
+			//_thisHeight = _thisHeight + 34;
+			//$(".search_btn").height(_thisHeight - 34);
+	  }
+	  else if( _this.hasClass('selected') == true && _this.attr('option') == '2'  && _searchHeight > 70) {
+			_this.removeClass('selected');
+			$("span[role='smoption_2']").hide();
+			$("input[role='smoption_2']").hide();
+			//$(".content_more").hide();
+			//_thisHeight = _thisHeight + 34;
+			//$(".search_btn").height(_thisHeight - 34);
+	  }
+	  
+	  if( _this.hasClass('selected') == false && _this.attr('option') == '3'  && _searchHeight == 70){
+			_this.addClass('selected');
+			$("span[role='smoption_3']").show();
+			$("input[role='smoption_3']").show();
+			//$(".content_more").show();
+			//_thisHeight = _thisHeight + 34;
+			$(".search_btn").height(_thisHeight + 34);
+	  }
+	  else if( _this.hasClass('selected') == false && _this.attr('option') == '3'  && _searchHeight > 70){
+			_this.addClass('selected');
+			$("span[role='smoption_3']").show();
+			$("input[role='smoption_3']").show();
+			//$(".content_more").show();
+			//_thisHeight = _thisHeight + 34;
+			//$(".search_btn").height(_thisHeight + 34);
+	  }
+	  else if( _this.hasClass('selected') == true && _this.attr('option') == '3' && _searchHeight == 70) {
+			_this.removeClass('selected');
+			$("span[role='smoption_3']").hide();
+			$("input[role='smoption_3']").hide();
+			//$(".content_more").hide();
+			//_thisHeight = _thisHeight + 34;
+			//$(".search_btn").height(_thisHeight - 34);
+	  }
+	  else if( _this.hasClass('selected') == true && _this.attr('option') == '3' && _searchHeight > 70) {
+			_this.removeClass('selected');
+			$("span[role='smoption_3']").hide();
+			$("input[role='smoption_3']").hide();
+			//$(".content_more").hide();
+			//_thisHeight = _thisHeight + 34;
+			//$(".search_btn").height(_thisHeight - 34);
+	  }
+	  
+	  if( _this.hasClass('selected') == false && _this.attr('option') !== '0' && _this.attr('option') !== '1' && _this.attr('option') !== '2' && _this.attr('option') !== '3' && _thisHeight > 70  && _searchHeight > 70){
+			_this.removeClass('selected');
+			$("span[role='smoption_0']").hide();
+			$("span[role='smoption_1']").hide();
+			$("span[role='smoption_2']").hide();
+			$("span[role='smoption_3']").hide();
+			
+			//_thisHeight = _thisHeight - 34;
+			$(".search_btn").height(_thisHeight - 34);
+	  }
+	  if($(".search_select_main li.selected").length == 0){
+				$(".search_btn").height(70);
+				//$(".content_more").hide();
+			}
+	  
+});
+</script>-->
+</body>
+</html>

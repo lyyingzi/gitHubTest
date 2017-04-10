@@ -1,0 +1,838 @@
+/*版心*/
+.container {
+    width: 1190px;
+    margin: 0 auto;
+}
+/*主题色*/
+.sub_color_blue {
+    color: #1DBFAD;
+}
+h1, h2, h3, h4, h5, h6 {
+    text-decoration: none;
+    font-weight: normal;
+    font-size: 100%;
+}
+h1, h2, h3, h4, h5, h6 {
+    font-size: 18px;
+}
+/*清除浮动*/
+.clearfix:before, .clearfix:after {
+    content: "";
+    display: table;
+}
+
+.clearfix:after {
+    clear: both;
+}
+
+.clearfix {
+    *zoom: 1; /*IE/7/6*/
+}
+body {
+    background-color: #F2F2F2;
+    position: relative;
+}
+/*.bxs_around {*/
+    /*-webkit-box-shadow: 1px 1px 1px #cccccc, -1px -1px 1px #cccccc;*/
+    /*-moz-box-shadow: 1px 1px 1px #cccccc, -1px -1px 1px #cccccc;*/
+    /*-o-box-shadow: 1px 1px 1px #cccccc, -1px -1px 1px #cccccc;*/
+    /*-ms-box-shadow: 1px 1px 1px #cccccc, -1px -1px 1px #cccccc;*/
+    /*box-shadow: 1px 1px 1px #cccccc, -1px -1px 1px #cccccc;*/
+/*}*/
+.bxs_bottom {
+    -webkit-box-shadow: 0px 1px 5px #cccccc;
+    -moz-box-shadow: 0px 1px 5px #cccccc;
+    -o-box-shadow: 0px 1px 5px #cccccc;
+    -ms-box-shadow: 0px 1px 5px #cccccc;
+    box-shadow: 0px 1px 5px #cccccc;
+}
+/*导航位置信息维护样式*/
+.nav_wrap .homePage {
+    cursor: pointer;
+}
+.car_main {
+    width: 100%;
+}
+.car_main .container {
+    display: -webkit-flex;
+    display: flex;
+    flex-direction: row;
+}
+/*车公司信息*/
+.car_main .car_msg {
+    width: 53%;
+    /*width: 610px;*/
+    /*height: 690px;*/
+    margin-right: 1%;
+    padding: 30px 35px;
+    background-color: #fff;
+    float: left;
+}
+.car_msg .car_msg_list {
+    height: 35px;
+    padding-top: 20px;
+}
+.car_msg_list dt {
+    width: 120px;
+    line-height: 35px;
+    float: left;
+}
+.car_msg_list dd {
+    float: left;
+    line-height: 35px;
+}
+/*短的输入框*/
+.short_text {
+    width: 90px;
+    height: 35px;
+    padding: 0 20px;
+    font-size: 16px;
+    background-color: #F1F1F1;
+
+}
+/*长的输入框*/
+.long_text {
+    min-width: 230px;
+    height: 35px;
+    padding: 0 10px;
+    font-size: 16px;
+    background-color: #F1F1F1;
+}
+/*弹窗样式*/
+.popup {
+    position: fixed;
+    top: 0;
+    left: 0;
+    display: none;
+    z-index: 2;
+}
+.popup .shade {
+    width: 100%;
+    height: 100%;
+    /*/!*兼容IE7、8 *!/*/
+    -ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=50)";
+    filter: alpha(opacity=50);
+    opacity:.5;
+    background-color: #000000;
+    z-index: 9;
+}
+.popup .popup_content {
+    width: 540px;
+    height: 100px;
+    background-color: #fff;
+    z-index: 999;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-top: -90px;
+    margin-left: -270px;
+    padding: 40px 0;
+}
+.popup p {
+    height: 60px;
+    font-size: 20px;
+}
+.popup .btn_content {
+    font-size: 0;
+}
+.popup .btn_content button {
+    width: 160px;
+    height: 40px;
+    font-size: 20px;
+    border: 0 none;
+    color: #fff;
+    background-color: #1DBFAD;
+    cursor: pointer;
+}
+.popup .btn_content button:first-child {
+    margin-left: 105px;
+}
+
+/*下拉列表*/
+select {
+    width: 90px;
+    height: 15px;
+    margin: 0;
+    padding: 0 5px;
+    font-size: 16px;
+    border: 0 none;
+    out-line:none;
+    background-color: #F1F1F1;
+}
+.car_msg_list dd select:focus {
+    outline: none;
+}
+/*详细地址*/
+.car_msg_list .car_address {
+
+}
+/*固定电话*/
+.car_msg_list .car_tel span {
+    display: inline-block;
+    width: 18px;
+    margin: 0 10px;
+    border-top: 2px solid #AEAEAE;
+}
+/*资源项*/
+.car_msg_list .radio_btn {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    margin-right: 10px;
+    border: 1px solid #1DBFAD;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    border-radius: 10px;
+    vertical-align: -15%;
+}
+.car_msg_list .radio_btn.bgc {
+    background-color: #1DBFAD;
+}
+/*收费标准*/
+.car_msg_list .car_fee_scale {
+    position: relative;
+}
+.car_msg_list .file {
+    width: 40px;
+    height: 40px;
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+    background: url(../img/info/collect_add.png) no-repeat center;
+}
+.car_msg_list .file_img {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    left: 0;
+    top: 0;
+    opacity: 0;
+    filter: alpha(opacity=0);
+    font-size: 100%;
+    cursor: pointer
+}
+/*收费标准下载按钮*/
+.car_msg_list .car_fee_load {
+    width: 48px;
+    height: 48px;
+    position: absolute;
+    top: 6px;
+    left: 60px;
+    background: url(../img/info/fee_load.png) no-repeat;
+}
+
+.car_msg_list .car_fee_hover {
+    width: 168px;
+    height: 34px;
+    line-height: 34px;
+    text-align: center;
+    border: 1px solid #1DBFAD;
+    background-color: #fff;
+    position: absolute;
+    top: -40px;
+    left: 0;
+    display: none;
+}
+/*收费标准弹窗样式*/
+.popupUpload .content {
+    /*width: 610px;*/
+    width: 550px;
+    max-height: 300px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-left: -305px;
+    margin-top: -180px;
+    padding: 44px 30px 44px 30px;
+    background-color: #fff;
+    z-index: 99;
+    overflow: hidden;
+    overflow-y: auto;
+}
+.popupUpload  .close {
+    width: 31px;
+    height: 31px;
+    background: url(../img/info/car_close.png) no-repeat;
+    position: absolute;
+    top: 15%;
+    left: 75%;
+    z-index: 1;
+}
+.popupUpload .content div {
+    margin-bottom: 24px;
+}
+.popupUpload .content div:last-child {
+    margin: 0;
+}
+.popupUpload .content img {
+    vertical-align: middle;
+    margin-right: 24px;
+}
+.popupUpload .content a:hover {
+    color: #1DBFAD;
+    text-decoration: underline;
+}
+
+    /*服务区域*/
+.car_msg_list .area_msg {
+    width: 210px;
+    padding: 10px 20px 0px 20px;
+}
+.car_msg_list .area_msg .area_msg_list {
+    margin-right: 30px;
+}
+.car_msg_list .area_msg .areaName {
+    margin-right: 5px;
+}
+.car_msg_list .area_msg .del {
+    color: red;
+}
+#append {
+    border: solid #87A900 2px;
+    border-top: 0;
+    display: none;
+}
+/*删除符号的样式*/
+.car_msg_list .area_msg .del {
+    color: red;
+}
+/*车公司介绍*/
+.car_msg_list .homeIntroduce {
+    width: 450px;
+    overflow-y: auto;
+    background-color: #F1F1F1;
+}
+.verify_error {
+    border: 1px solid red;
+}
+/*地图*/
+.car_main .car_map {
+    width: 40%;
+    flex: 1;
+    /*background-color: pink;*/
+    display: -webkit-flex;
+    display: flex;
+    flex-direction: column;
+    float: left;
+}
+/*按钮样式*/
+.car_map .car_map_manage .car_manage_btn {
+    margin-right: 13px;
+}
+.car_map .car_map_manage .car_manage_btn:last-child {
+    margin-right: 0;
+}
+.BMap_Marker img{
+    width:100%;
+}
+/*地图弹窗*/
+.popupMap {
+    /*width: 100%;*/
+    /*height: 100%;*/
+    background-color: gray;
+    position: fixed;
+    left: 0;
+    top: 0;
+    z-index: 3;
+    /*filter: alpha(opacity = 50);*/
+    display:none;
+}
+.popup_content {
+    width: 960px;
+    height: 540px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-left: -480px;
+    margin-top: -270px;
+}
+.anchorBL button .BMap_noprint .anchorTL{
+    position: fixed;
+}
+/*详情页地图弹框*/
+.popupDetailMap {
+    /*width: 100%;*/
+    /*height: 100%;*/
+    background-color: gray;
+
+    position: fixed;
+    left: 0;
+    top: 0;
+    z-index: 3;
+    /*filter: alpha(opacity = 50);*/
+    /*opacity: 0.5;*/
+    display:none;
+}
+.popupDetailMap .popup_content {
+    /*position: relative;*/
+}
+.popupDetailMap .map_close {
+    width: 31px;
+    height: 31px;
+    background: url(../img/info/car_close.png) no-repeat;
+    position: absolute;
+    top: 31px;
+    right: 31px;
+    cursor: pointer;
+}
+
+/*处理按钮*/
+.car_map .car_map_manage {
+    font-size: 0;
+}
+.car_map .car_map_manage .car_manage_btn {
+    padding: 10px 35px;
+    font-size: 20px;
+    display: inline-block;
+    color: #fff;
+    background-color: #1DBFAD;
+}
+.car_map .car_map_msg {
+    width: 100%;
+    height: 90%;
+    height: 465px\9;
+    flex: 1;
+    background-color: #fff;
+    position: relative;
+
+}
+.car_map .car_map_msg .car_map_content {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    /*overflow: hidden;*/
+}
+/*编辑*/
+.car_map .car_map_msg .car_map_edit {
+    width: 92px;
+    height: 36px;
+    line-height: 36px;
+    text-align: center;
+    position: absolute;
+    right: 0;
+    top: 0;
+    color: #fff;
+    background-color: #1DBFAD;
+    opacity: 0.5;
+    filter: alpha(opacity=0.5);
+
+}
+.car_btn {
+    font-size: 0;
+}
+.car_btn .container {
+    /*position: relative;*/
+    text-align: center;
+}
+.car_btn .car_btn_msg{
+    width: 160px;
+    height: 40px;
+    font-size: 20px;
+    border: 0 none;
+    color: #fff;
+    background-color: #1DBFAD;
+    /*position: absolute;*/
+    /*left: 50%;*/
+}
+.car_btn .car_btn_msg:first-child {
+    /*margin-left: 435px;*/
+    margin-right: 90px;
+}
+/*车公司详情页面*/
+/*车公司图片*/
+.car_company_page {
+    display: none;
+}
+.car_company .company_photo {
+    display: -webkit-flex;
+    display: flex;
+}
+.car_company .company_photo .company_photo_list {
+    width: 790px;
+    height: 445px;
+    margin-right: 10px;
+    background-color: #fff;
+    float: left;
+}
+.car_company .company_photo .swiper-slide {
+    /*-webkit-box-sizing: border-box;*/
+    /*-moz-box-sizing: border-box;*/
+    /*box-sizing: border-box;*/
+    width: 790px;
+    height: 445px;
+    -webkit-background-size: cover;
+    background-size: cover;
+}
+.car_company .swiper-slide img {
+    width: 100%;
+    height: 100%;
+}
+.car_company .company_photo .car_company_msg {
+    padding: 30px;
+    flex: 1;
+    background-color: #fff;
+    float: left;
+    width: 330px\9;
+    height: 385px\9;
+}
+.car_company_msg p {
+    margin-top: 30px;
+}
+.car_company_msg .use_car {
+    width: 34px;
+    height: 16px;
+    margin-left: 10px;
+    display: inline-block;
+    background: url(../img/info/use_car.png) no-repeat;
+    vertical-align: -10%;
+}
+.car_company_msg .company_tel {
+    color: #1DBFAD;
+}
+.car_company_msg .company_coverage {
+    display: flex;
+}
+.car_company_msg .company_coverage .coverage_content {
+    flex: 1;
+}
+.car_company_msg .icon {
+    height: 20px;
+    vertical-align: text-top;
+    margin-right: 12px;
+}
+.car_company_msg .company_map {
+    padding-left: 36px;
+}
+.car_company_msg .company_map .check_map {
+    color:  #1DBFAD;
+}
+/*车公司图片弹窗*/
+.popupImg {
+    /*width: 100%;*/
+    /*height: 100%;*/
+    position: fixed;
+    top: 0;
+    left: 0;
+    display: none;
+    z-index: 9;
+
+}
+.popupImg .shade {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-color: black;
+    opacity: 0.5;
+    filter: alpha(opacity = 50);
+}
+.pc-slide {
+    width: 789px;
+    margin: 0 auto;
+    position: relative;
+}
+/*关闭按钮*/
+.popupImg .pc-slide .close {
+    width: 40px;
+    height: 40px;
+    background: url(../img/info/car_close.png) no-repeat;
+    position: absolute;
+    top: -50px;
+    right: -84px;
+    z-index: 10;
+}
+.popupImg .view {
+    margin: 60px auto 40px;
+}
+.view .swiper-container {
+    width: 789px;
+    height: 439px;
+}
+.view img {
+    width: 789px;
+    height: 439px;
+}
+.view .arrow-left {
+    background: url(../img/info/left_arrow.png) no-repeat;
+    position: absolute;
+    left: 20px;
+    top: 50%;
+    margin-top: -50px;
+    width: 32px;
+    height: 57px;
+    z-index: 10;
+}
+
+.view .arrow-right {
+    background: url(../img/info/right_arrow.png) no-repeat;
+    position: absolute;
+    right: 20px;
+    top: 50%;
+    margin-top: -50px;
+    width: 32px;
+    height: 57px;
+    z-index: 10;
+}
+
+.preview {
+    width: 100%;
+    margin-top: 10px;
+    position: relative;
+}
+
+.preview .swiper-container {
+    width: 789px;
+    height: 80px;
+    /*margin-left: 35px;*/
+}
+
+.preview .swiper-slide {
+    width: 142px;
+    height: 80px;
+}
+.preview .swiper-slide img {
+    width: 142px;
+    height: 80px;
+}
+.preview .slide6 {
+    width: 142px;
+    margin: 0;
+}
+
+.preview .arrow-left {
+    background: url(../img/info/left_arrow.png) no-repeat;
+    position: absolute;
+    left: -70px;
+    /*top: 50%;*/
+    /*margin-top: -9px;*/
+    top: 10px;
+    width: 32px;
+    height: 57px;
+    z-index: 10;
+}
+
+.preview .arrow-right {
+    background: url(../img/info/right_arrow.png) no-repeat;
+    position: absolute;
+    right: -70px;
+    top: 10px;
+
+    /*margin-top: -9px;*/
+    width: 32px;
+    height: 57px;
+    z-index: 10;
+}
+
+/*.preview img {*/
+    /*padding: 1px;*/
+/*}*/
+.preview .swiper-slide {
+    margin-right: 20px;
+}
+.preview .active-nav img {
+    padding: 0;
+    border: 1px solid #F00;
+}
+
+/*车公司介绍*/
+.car_company .company_introduce {
+    padding: 30px 30px 30px 40px;
+    background-color: #fff;
+}
+.car_company .company_introduce p {
+    width: 100%;
+    margin-bottom: 20px;
+    line-height: 32px;
+    text-indent: 2em;
+}
+.car_company .company_introduce .text_hide {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 3;
+    overflow: hidden;
+}
+
+.car_company .company_introduce .introduce_details {
+    width: 100%;
+    text-align: right;
+}
+/*车型信息*/
+.car_company .company_car_type {
+    padding: 30px 30px 30px 40px;
+    background-color: #fff;
+}
+.car_company .company_car_type table {
+    width: 100%;
+    border-collapse: collapse;
+    border-spacing: 0;
+
+}
+.company_car_type tr {
+    width: 100%;
+    height: 60px;
+}
+.company_car_type thead tr{
+    background-color: #E7E7E7;
+}
+.company_car_type td {
+    text-align: center;
+}
+.company_car_type tbody tr:nth-child(2n) {
+    background-color: #F0F1F3;
+}
+/*上传照片页面*/
+.upload_img_page {
+    display: none;
+}
+.upload_img {
+
+}
+/*照片详情*/
+.upload_img .img_details {
+    width: 32.77%;
+    height: 262px;
+    float: left;
+    margin-right: 10px;
+    background-color: #F2F2F2;
+}
+.upload_img .img_details img {
+    width: 100%;
+    height: 100%;
+}
+.upload_img li:nth-of-type(3n) {
+    margin-right: 0;
+}
+.upload_img .img_details .img_container {
+
+    width: 100%;
+    height: 214px;
+    background-color: blue;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+.img_details .img_container.img_add {
+    display: inline-block;
+    /*width: 100%;*/
+    /*height: 100%;*/
+    background: url(../img/info/img_add.png) no-repeat center center #fff;
+    overflow: hidden;
+    position: relative;
+}
+.img_details .img_add .upfile {
+    /*position: absolute;*/
+    /*top: -200px;*/
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    filter: alpha(opacity=0);
+}
+.img_details .img_add .upFileBtn {
+    position: absolute;
+    top: 0;
+    left: 0;
+    /*width: 100%;*/
+    /*height: 100%;*/
+    opacity: 0;
+    filter: alpha(opacity=0);
+    cursor: pointer;
+}
+.img_details .img_msg {
+    margin-top: 10px;
+}
+.img_details .img_title {
+    background-color: #F2F2F2;
+}
+.img_details .img_handle {
+
+}
+
+
+/*车型管理页面*/
+.car_control_page {
+    display: none;
+}
+.car_control {
+
+}
+.car_control .container {
+    display: -webkit-flex;
+    display: flex;
+}
+/*车型信息*/
+.car_control .car_type_msg {
+    padding: 30px 40px;
+    flex: 1;
+    background-color: #fff;
+}
+.car_control .car_type_msg .car_use_title {
+    width: 100px;
+    height: 40px;
+    line-height: 40px;
+    text-align: center;
+    background-color: #E7E7E7;
+}
+.car_control .car_type_msg table {
+    width: 100%;
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+.car_control .car_type_msg thead {
+    background-color: #E7E7E7;
+}
+.car_control .car_type_msg tr {
+    height: 60px;
+}
+.car_control .car_type_msg td {
+    text-align: center;
+}
+.car_control .car_type_msg tbody tr:nth-child(2n) {
+    background-color: #F0F1F3;
+}
+/*新增车型按钮*/
+.car_control .add_type_btn {
+    width: 190px;
+    height: 70px;
+    line-height: 70px;
+    text-align: center;
+    margin-left: 10px;
+    background-color: #1DBFAD;
+    color: #fff;
+}
+
+
+/*新增车型页面*/
+.car_add_page {
+    display: none;
+}
+.car_add .car_add_main{
+    padding: 30px 40px;
+    background-color: #fff;
+}
+.car_add .car_add_msg {
+
+}
+.car_add .car_add_msg dl {
+    width: 50%;
+    margin-bottom: 20px;
+    float: left;
+}
+.car_add .car_add_msg dt {
+    width: 105px;
+    padding-top: 6px;
+}
+.car_add .car_add_msg dd:nth-child(3) {
+    color: #BBBBBB;
+}
+.car_add .car_add_msg textarea {
+    width: 230px;
+    height: 50px;
+    padding: 10px;
+    background-color: #F1F1F1;
+    border: 0 none;
+}
+/*编辑车型信息*/
+.car_edit_page {
+    display: none;
+}

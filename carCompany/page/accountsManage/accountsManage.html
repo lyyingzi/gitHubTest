@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title>账号管理</title>
+    <meta name="author" content="quyun@bravolinks.cn"/>
+    <link rel="stylesheet" type="text/css" href="../css/base.css"/>
+    <link rel="stylesheet" type="text/css" href="../css/common.css">
+    <link rel="stylesheet" type="text/css" href="../css/inquiryManage.css">
+    <link rel="stylesheet" type="text/css" href="../css/jquery-ui.min.css">
+    <link rel="stylesheet" type="text/css" href="../css/account.css"/>
+</head>
+
+<body>
+<!--header start-->
+<div class="header_car_bg">
+
+</div>
+<!--header end-->
+
+<div class="nav_wrap bg_array01 account_manage">
+    <div class="nav_bread font-array02  center">当前位置：账号管理</div>
+    <div class="nav_main center">
+
+        <!--6个tag-->
+        <ul class="nav_list_short" role="nav-container-main">
+            <li class="inquiry_manage" style="margin-left:0px;" role="inquiry-manage"><i class="inquiry_manage"></i><span>询价单管理</span></li>
+            <li role="order-manage"><i class="order_manage"></i><span>订单管理</span></li>
+            <li role="setting-bill"><i class="setting_bill"></i><span>结算账单</span></li>
+            <li role="info-maintain"><i class="info_maintain"></i><span>信息维护</span></li>
+            <li class="accounts_manage_selected" role="accounts-manage"><i class="accounts_manage"></i><span>账号及权限管理</span></li>
+            <li role="customer-service"><i class="customer_service"></i><span>客户服务</span></li>
+        </ul>
+
+    </div>
+    <div class="search_wrap  mtop35 ">
+        <div class="search_main_long fl" role="search-main">
+            <div class="search_input_long fl">
+                <div class="fl">
+                    <span class="mright10">账号角色</span>
+                    <select class="select_normal" id="roleState" style="">
+						<option value='-1'></option>
+                    </select>
+                    <span class=" mleft40 mright10">账号状态</span>
+                    <select class="select_normal" id="userState" style="" >
+                        <option value="-1"></option>
+                        <option value="00">停用</option>
+                        <option value="01">启用</option>
+                    </select>
+                </div>
+                <div class="clear"></div>
+            </div>
+            <div class="search_btn fr" role="search-btn" onclick="searchAccountManage()"></div>
+            <div class="clear"></div>
+        </div>
+
+        <a class="new fr" onclick="saveAccountManage();">新建账号</a>
+        <div class="clear"></div>
+    </div>
+
+    <div class="account_wrap mtop35">
+        <div class="account_main center" style="">
+            <table width="100%" border="0" cellpadding="0" cellspacing="0" class="account_table ">
+                <thead>
+                <tr class="dark-bg center-tr font-bold">
+                    <td>公司名称</td>
+                    <td>用户名</td>
+                    <td>真实姓名</td>
+                    <td>账号状态</td>
+                    <td>账号角色</td>
+                    <td>操作时间</td>
+					<td>操作人</td>
+                    <td>操作</td>
+                </tr>
+                </thead>
+                <tbody id="accountsManageTBody">
+                </tbody>
+
+            </table>
+
+        </div>
+
+        <!--page最新-->
+        <div class="account_page center" style="width:1190px; height:165px; margin-top:40px;">
+            <ul class="page-nav accountsManage-page-nav"></ul> 
+        </div>
+    </div>
+</div>
+
+<!--footer start-->
+<div class="footer_car_bg bg_blue">
+    <div class="footer_car center bg_blue">
+        <div class="about_us_car">
+            <span class="span_right" role="feed-back">意见反馈</span>
+            <span class="span_right" role="about-us">关于我们</span>
+            <span class="" role="contact-us">联系我们</span>
+
+            <div class="imice_logo_main mtop20">
+                <div class="imice_logo fl mleft60"></div>
+                <div class="fl mleft40">
+                    <p class=" align-center line-height40">客服热线：010-57074011</p>
+
+                    <p class="align-center">服务邮箱：wemeeting@i-mice.cn</p>
+                </div>
+            </div>
+        </div>
+        <div class=" align-center font-array01 copy_right_car">京ICP备16027591号-2&nbsp;&nbsp;|&nbsp;&nbsp;中青博联整合营销顾问股份有限公司&nbsp;
+            &nbsp;北京爱麦思科技有限公司
+        </div>
+    </div>
+</div>
+<!--footer end-->
+
+<!--right_nav 右侧导航-->
+<div class="right_nav">
+    <ul role="right-nav">
+        <li><a href="javascript:void(0);" class="to_top" role="to-top"></a></li>
+        <li class="inquiry_manage_selected" role="inquiry-manage"><a href="javascript:void(0);" class="inquiry_manage"></a></li>
+        <li class="order_manage" role="order-manage"><a href="javascript:void(0);" class="order_manage"></a></li>
+        <li class="setting_bill" role="setting-bill"><a href="javascript:void(0);" class="setting_bill"></a></li>
+        <li class="info_maintain" role="info-maintain"><a href="javascript:void(0);" class="info_maintain"></a></li>
+        <li class="accounts_manage" role="accounts-manage"><a href="javascript:void(0);" class="accounts_manage"></a></li>
+        <li class="customer_service" role="customer-service"><a href="javascript:void(0);" class="customer_service"></a></li>
+        <li><a href="javascript:void(0);" class="ewm"></a></li>
+    </ul>
+</div>
+<script type="text/javascript" src="../js/jquery-3.1.1.min.js"></script>
+<script type="text/javascript" src="../js/jquery-ui.min.js"></script>
+<script type="text/javascript" src="../js/jquery.page.js"></script>
+<script type="text/javascript" src="../js/util.js"></script>
+<script type="text/javascript" src="../js/common.js"></script>
+<script type="text/javascript" src="../js/interface.js"></script>
+<script type="text/javascript" src="../js/handle.js"></script>
+<script type="text/javascript" src="../js/accountsManage.js"></script>
+
+
+<script>
+	$(document).ready(function(){
+		accountsManage.accountsManageList(1);
+		accountsManage.roleState(1);
+	});
+	
+	function searchAccountManage () {
+		accountsManage.accountsManageList(1);
+	};
+	function saveAccountManage() {
+		localStorage.busUserId = "";
+		location.href = "../accountsManage/newAccount.html";
+	}
+	
+	function editAccountManage(busUserId) {
+		localStorage.busUserId = busUserId;
+		location.href = "../accountsManage/newAccount.html";
+	}
+	
+</script>
+
+
+
+</body>
+</html>

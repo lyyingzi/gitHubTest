@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title>查看账号</title>
+    <!--<meta name="author" content="quyun@bravolinks.cn"/>-->
+    <link rel="stylesheet" type="text/css" href="../css/base.css"/>
+    <link rel="stylesheet" type="text/css" href="../css/common.css">
+    <link rel="stylesheet" type="text/css" href="../css/jquery-ui.min.css">
+    <link rel="stylesheet" type="text/css" href="../css/account.css"/>
+
+</head>
+<body class="bg_array01">
+<!--header start-->
+<div class="header_car_bg">
+
+</div>
+<!--header end-->
+
+<div class="nav_wrap bg_array01 new_account">
+    <div class="nav_bread font-array02  center">当前位置：<span class="font_blue">账号及权限管理</span> &gt; 查看账号</div>
+    <div class="nav_main center">
+        <!--6个tag-->
+       
+    </div>
+    <div class="view_account">
+        <h3>
+            <img src="../img/new_icon.png" alt="" style="vertical-align: middle;" class="mright30"/>
+            <span>查看账号</span>
+        </h3>
+        <div class="view_account_content">
+            <dl id="photoContent">
+                <dt>头像</dt>
+                <dd id="">
+                    <div class="addPhoto fl" id="file">
+                        <!--<input type="file" class="file"/>-->
+                    </div>
+                    <div class="photoList fl">
+                        <div class="photoDetail" id="photoDetail">
+                            <img src="" alt=""  id ="imgDetail" style="width:100%;height:100%">
+                        </div>
+                    </div>
+                </dd>
+            </dl>
+            <dl>
+                <dt>用户名：</dt>
+				<dt id='user_Id'>
+                </dt>
+				<dt class="mleft50" >
+				<a href="javascript:void(0)" class="" role="modify-password">修改密码</a>
+                </dt>
+            </dl>
+            <div class="clear"></div>
+            <dl>
+                <dt>真实姓名：</dt>
+                <dt id='real_user_Name'>
+                </dt>
+            </dl>
+            <dl>
+                <dt>联系电话：</dt>
+                <dt id='user_Phone'>
+                </dt>
+            </dl>
+            <div class="clear"></div>
+            <dl>
+                <dt>所属公司：</dt>
+                <dt id='user_company'>
+                </dt>
+            </dl>
+            <div class="clear"></div>
+        </div>
+
+    </div>
+    <div class="dispose_btn">
+        <a href="javascript:void(0)" role='goback'>返回</a>
+    </div>
+</div>
+
+
+<!--footer start-->
+<div class="footer_car_bg bg_blue">
+
+</div>
+<!--footer end-->
+
+<!--right_nav 右侧导航-->
+<div class="right_nav">
+   
+</div>
+
+
+</body>
+<script type="text/javascript" src="../js/jquery-1.11.1.min.js"></script>
+<script type="text/javascript" src="../js/jquery-ui.min.js"></script>
+<!--七牛上传-->
+<script src="../js/plupload.full.min.js"></script>
+<script src="../js/plupload.min.js"></script>
+<script src="../js/qiniu.js"></script>
+
+<script type="text/javascript" src="../js/jquery.page.js"></script>
+<script type="text/javascript" src="../js/common.js"></script>
+<script type="text/javascript" src="../js/interface.js"></script>
+<script type="text/javascript" src="../js/util.js"></script>
+<script type="text/javascript" src="../js/handle.js"></script>
+<script type="text/javascript" src="../js/accountsManage.js"></script>
+<script type="text/javascript" >
+$(function(){
+accountsManage.selectCarUserByUserId();
+
+//    七牛上传
+    var fileToken;      //返回的token值
+    var fileKey;
+    var fileName;
+    function getUploadToken(){
+        var photoData = {
+            uId: AUTOCAR.data_uId
+        };
+	    var newName = "{'fileName': "+ "'"+fileName+"'" +"}";
+	    console.log(newName);
+	    var dataInfo = eval("(" + newName + ")");
+	    console.log(dataInfo);
+
+	    var dataAll = $.extend({}, dataInfo,photoData);
+	    console.log(dataAll);
+        $.ajax({
+            type: "post",
+            url: interface.host + '/vehiclecenter/upLoad/carUserImageGetToken',
+            cache: false,
+            async: false,
+            data: dataAll,
+            dataType: "json",
+            beforeSend: function () {
+            },
+            success: function (info) {
+                fileToken = info.rows[0].token;
+                fileKey = info.rows[0].key;
+                console.log(fileKey);
+            },
+            error: function (XMLHttpRequest, textStatus, errorThrown) {
+                util.tips.basic(errorThrown);
+            }
+        });
+        return fileToken;
+    };
+    var uploader = Qiniu.uploader({
+
+        runtimes: 'html5,flash,html4',    //上传模式,依次退化
+        browse_button: "file",       //上传选择的点选按钮，**必需**
+        uptoken_func : getUploadToken,
+        domain: 'http://7xpx3m.com1.z0.glb.clouddn.com/',   //bucket 域名，下载资源时用到，**必需**
+        get_new_uptoken: true,  //设置上传文件的时候是否每次都重新获取新的token
+        container: "photoContent",           //上传区域DOM ID，默认是browser_button的父元素，
+        max_file_size: '100mb',           //最大文件体积限制
+        flash_swf_url: 'js/plupload/Moxie.swf',  //引入flash,相对路径
+        max_retries: 3,                   //上传失败最大重试次数
+        chunk_size: '4mb',                //分块上传时，每片的体积
+        auto_start: true,                 //选择文件后自动上传，若关闭需要自己绑定事件触发上传
+        unique_names: false ,
+        save_key: false,
+        init: {
+            'FilesAdded': function (up, files) {
+                fileName = files[0].name;
+
+            },
+            'BeforeUpload': function (up, file) {
+//                 每个文件上传前,处理相关的事情
+                var photoType = "jpg,png";
+                var photoArr = photoType.split(",");
+                var nameStr = fileName.substring(fileName.lastIndexOf(".") + 1,fileName.length);
+                if(nameStr != "jpg" && nameStr != "png"){
+                    util.tips.basic("必须上传图片");
+                    return false;
+                }
+                console.log('before');
+
+            },
+            'UploadProgress': function (up, file) {
+                // 每个文件上传时,处理相关的事情
+            },
+            'FileUploaded': function (up, file, info) {
+                alert("上传成功");
+                accountsManage.selectCarUserByUserId();
+            },
+            'Error': function (up, err, errTip) {
+                //上传出错时,处理相关的事情
+                console.log('err');
+            },
+            'UploadComplete': function () {
+                //队列文件处理完毕后,处理相关的事情
+            },
+            'Key': function (up, file) {
+                // 若想在前端对每个文件的key进行个性化处理，可以配置该函数
+                // 该配置必须要在 unique_names: false , save_key: false 时才生效
+                console.log(fileKey);
+                return fileKey;
+            }
+        }
+    });
+
+});
+
+
+</script>
+
+
+</html>
+
+

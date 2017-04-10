@@ -1,0 +1,171 @@
+/*账号管理start*/
+
+.account_manage .search_main_long {
+    width:1023px;
+}
+.account_manage .new {
+    width: 120px;
+    height: 76px;
+    line-height:76px;
+    background-color: #373189;
+    text-align: center;
+    color:#fff;
+    margin-left:10px;
+    cursor: pointer;
+}
+.account_manage .search_btn {
+    background: url(../img/account_search.png) no-repeat center center #373189;
+}
+.account_manage .account_wrap {
+    margin-left: auto;
+    margin-right:auto;
+}
+.account_manage .account_wrap .account_main table tbody  tr a {
+    margin-right:5px;
+}
+.account_manage .account_wrap .account_main .account_table td {
+    border-right:0;
+}
+.font_blue {
+    color:#2117a5;
+}
+/*账号管理end*/
+
+/*新建账号start*/
+.new_account .use_car_main  .new_icon {
+    height: 40px;
+    line-height: 40px;
+    background:url(../img/new_icon.png) no-repeat;
+    padding-left: 60px;
+    font-size: 16px;
+}
+.new_account .use_car_main  .account_info {
+    width: 510px;
+
+}
+.new_account .use_car_main  .account_info label {
+    display: block;
+    line-height: 35px;
+    margin:20px 0;
+}
+.new_account .use_car_main  .account_info label input {
+    width: 250px;
+    height: 35px;
+    background-color: #f1f1f1;
+    padding-left:5px;
+    box-sizing: border-box;
+}
+.new_account .use_car_main  .account_info label .tip {
+    color:#BBBBBB;
+    font-size:14px;
+    margin-left:5px;
+}
+.new_account .use_car_main  .account_info label .title {
+    display: inline-block;
+    width: 100px;
+    text-align: left;
+}
+.new_account .use_car_main  .account_info label .role_icon  {
+    height: 35px;
+    display: inline-block;
+    background:url(../img/role_icon.png) no-repeat 0 center ;
+    padding-left:30px;
+}
+.new_account .operate_btn_main {
+    padding-bottom:300px;
+}
+.new_account .operate_btn_main .operate_btn_yellow_limit {
+    background-color: #373189;
+}
+/*新建账号end*/
+/*查看账号 start*/
+.view_account {
+    width: 1110px;
+    margin: 10px auto 0;
+    padding: 30px 40px;
+    background-color: #fff;
+    font-size: 16px;
+}
+.view_account_content {
+    width: 100%;
+    margin-top: 10px;
+}
+.view_account_content dl {
+    float: left;
+    width: 50%;
+
+    margin-bottom: 20px;
+}
+.view_account_content dl dt {
+    width: auto;
+    margin-top: 6px;
+    text-align: left;
+    float: left;
+}
+.view_account_content dl dt:first-child {
+    width: 95px;
+}
+
+.view_account_content dl:first-child dt {
+    margin-top: 30px;
+}
+.view_account_content dl dd {
+    float: left;
+}
+.view_account_content dl dd input {
+    width: 250px;
+    height: 35px;
+    background-color: #f1f1f1;
+    padding-left:5px;
+    box-sizing: border-box;
+}
+.view_account_content dl a {
+    color: #244FFF;
+}
+.view_account_content .addPhoto {
+    width: 40px;
+    height: 40px;
+    margin-right: 20px;
+    margin-top: 20px;
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+    background: url(../img/add_view_account.png) no-repeat center;
+}
+.view_account_content .addPhoto .file {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    left: 0;
+    top: 0;
+    opacity: 0;
+    filter: alpha(opacity=0);
+    font-size: 100%;
+    cursor: pointer
+}
+.view_account_content .photoList .photoDetail {
+    width: 80px;
+    height: 80px;
+    border: 1px solid #373189;
+    -webkit-border-radius: 40px;
+    -moz-border-radius: 40px;
+    border-radius: 40px;
+    overflow:hidden;
+}
+/*按钮*/
+.dispose_btn {
+    width: 100%;
+    margin: 20px 0;
+    text-align: center;
+}
+.dispose_btn a {
+    /*margin: 0 auto;*/
+    width: 160px;
+    height: 40px;
+    line-height: 40px;
+    text-align: center;
+    display: inline-block;
+    color: #fff;
+    background-color: #373189;
+}
+/*查看账号 end*/
