@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>地图</title>
+    <script src="./js/jquery-3.1.1.min.js"></script>
+    <script type="text/javascript" src="http://api.map.baidu.com/api?key=&v=1.1&services=true"></script>
+    <style>
+        .map_content {
+            width: 800px;
+            height: 600px;
+            margin: 200px auto;
+            background-color: pink;
+        }
+        .popupMap {
+            background-color: gray;
+            position: fixed;
+            top: 0;
+            left: 0;
+            display: none;
+        }
+        .popup_content {
+            width: 50%;
+            height: 50%;
+            margin: 10% 25%;
+        }
+    </style>
+    <script>
+        //    异步加载地图的方法
+//                function loadJScript() {
+//                    var script = document.createElement("script");
+//                    script.type = "text/javascript";
+//                    script.src = "http://api.map.baidu.com/api?key=&v=1.1&services=true&callback=init";
+//                    document.body.appendChild(script);
+//                }
+//                window.onload = loadJScript;  //异步加载地图
+    </script>
+</head>
+<body>
+<div id="mapContent" class="map_content">
+
+</div>
+<div class="popupMap">
+    <div id="container2" class="popup_content"></div>
+</div>
+<dl class="car_msg_list">
+    <dt>省市区</dt>
+    <dd>
+        <select name="proId" id="proId" style="width:140px;height:35px" class="province">
+            <option value="" class="">---请选择---</option>
+        </select>
+        <span>&nbsp;一&nbsp;</span>
+        <select name="levId" id="levId" style="width:140px;height:35px" class="city">
+            <option value="">---请选择---</option>
+        </select>
+        <span>&nbsp;一&nbsp;</span>
+        <select name="resId" id="resId" style="width:140px;height:35px" class="district">
+            <option value="">---请选择---</option>
+        </select>
+        <span>&nbsp;&nbsp;</span>
+    </dd>
+</dl>
+<div class="clear"></div>
+<dl class="car_msg_list">
+    <dt>详细地址</dt>
+    <dd class="">
+        <input type="text" class="car_address long_text" name="jDizhi" id="jDizhi"/>
+    </dd>
+</dl>
+<input type="hidden" id="detailLng" value=""/>     <!-- 经度 -->
+<input type="hidden" id="detailLat" value=""/>     <!-- 纬度 -->
+
+<script>
+
+    $(function(){
+
+        $(".popupMap").width($(window).width());
+        $(".popupMap").height($(window).height());
+        //    异步加载地图的方法
+//        function loadJScript() {
+//            var script = document.createElement("script");
+//            script.type = "text/javascript";
+//            script.src = "http://api.map.baidu.com/api?key=&v=1.1&services=true&callback=init";
+//            document.body.appendChild(script);
+//        }
+//        window.onload = loadJScript;  //异步加载地图
+
+        //------------------------地图---------------------
+
+        function init(container, longitude, latitude, city, flag) {
+            var map = new BMap.Map(container);          // 创建地图实例
+            var point = new BMap.Point(longitude, latitude);
+            // 创建点坐标
+            map.centerAndZoom(point, 15);                 // 初始化地图，设置中心点坐标和地图级别
+            map.enableScrollWheelZoom(true);
+            map.setCurrentCity(city); // 仅当设置城市信息时，MapTypeControl的切换功能才能可用
+            map.addControl(new BMap.NavigationControl());    //地图平移缩放
+            map.addControl(new BMap.ScaleControl());    //比例尺控件
+            map.addControl(new BMap.OverviewMapControl());    //缩略地图控件
+            //map.addControl(new BMap.MapTypeControl());   //地图类型控件
+
+            var marker = new BMap.Marker(point); //创建marker对象
+            marker.setIcon(new BMap.Icon('./img/map_mark.png', new BMap.Size(21, 34)));
+            if (flag) {
+                marker.enableDragging(); //marker可拖拽
+            }
+            map.addOverlay(marker);   // 将标注添加到地图中
+            //marker.setAnimation(BMAP_ANIMATION_BOUNCE); //跳动的动画
+            return [map, marker];
+        };
+
+        var oriLong = 116.438711;
+        var oriLat = 39.943699;
+        var arr = init("mapContent",oriLong,oriLat,"北京",false);
+        var map = arr[0];
+        var nowLong,nowLat;
+
+        //----------------------------------编辑------------------------------------------
+        // 定义一个控件类,即function  定义构造函数并继承Controlv
+        //编辑
+        var map2;
+
+        function ZoomControl() {
+            // 默认停靠位置和偏移量
+            this.defaultAnchor = BMAP_ANCHOR_TOP_LEFT;
+            this.defaultOffset = new BMap.Size(200, 10); // 距离中间位置
+        }
+
+        // 通过JavaScript的prototype属性继承于BMap.Control
+        ZoomControl.prototype = new BMap.Control();
+
+        // 确认
+        function ZoomControl1() {
+            // 默认停靠位置和偏移量
+            this.defaultAnchor = BMAP_ANCHOR_TOP_LEFT;
+            this.defaultOffset = new BMap.Size(50, 10); // 距离中间位置
+        }
+
+        // 通过JavaScript的prototype属性继承于BMap.Control
+        ZoomControl1.prototype = new BMap.Control();
+
+        // 取消
+        function ZoomControl2() {
+            // 默认停靠位置和偏移量
+            this.defaultAnchor = BMAP_ANCHOR_TOP_RIGHT;
+            this.defaultOffset = new BMap.Size(50, 10); // 距离中间位置
+        }
+
+        // 通过JavaScript的prototype属性继承于BMap.Control
+        ZoomControl2.prototype = new BMap.Control();
+
+        // 查看
+        function ZoomControl3() {
+            // 默认停靠位置和偏移量
+            this.defaultAnchor = BMAP_ANCHOR_BOTTOM_LEFT;
+            this.defaultOffset = new BMap.Size(250, 10); // 距离中间位置
+        }
+
+        // 通过JavaScript的prototype属性继承于BMap.Control
+        ZoomControl3.prototype = new BMap.Control();
+
+        //以上，扩展原型-------------------------------------------------------------
+
+        // 创建控件
+        // 编辑
+        var myZoomCtrl = new ZoomControl();
+
+        //确认
+        var myZoomCtrl1 = new ZoomControl1();
+
+        // 取消
+        var myZoomCtrl2 = new ZoomControl2();
+
+        // 查看地图
+        var myZoomCtrl3 = new ZoomControl3();
+
+        // 自定义控件必须实现自己的initialize方法,并且将控件的DOM元素返回
+        // 在本方法中创建个div元素作为控件的容器,并将其添加到地图容器中
+        ZoomControl.prototype.initialize = function (map) {
+            // 创建一个DOM元素
+            var button = document.createElement("Button");
+            // 添加文字说明
+            button.appendChild(document.createTextNode("编 辑"));
+            // 设置样式
+            button.style.position = "fixed";
+            button.style.cursor = "pointer";
+            button.style.border = "0 none";
+            button.style.width = "92px";
+            button.style.height = "36px";
+            //button.style.borderRadius="5px";
+            button.style.background = "#1DBFAD";
+            button.style.opacity = "0.5";
+            button.style.color = "#fff";
+            button.style.marginLeft = "450px";
+            button.style.marginTop = "-10px";
+
+            // 添加DOM元素到地图中
+            map.getContainer().appendChild(button);
+
+            // 绑定事件,点击编辑显示确认和取消按钮
+            button.onclick = function (e) {
+                $(".popupMap").css({
+                    display: "block"
+                });
+                //$("#dituContent").css({
+                //    display : "none"
+                //});
+                var arrBJ = init("container2", oriLong, oriLat, "", true);
+                map2 = arrBJ[0];
+                //map2.addEventListener("dragend", function(){ //拖动地图后，地图中心的经纬度坐标
+                //    var center = map2.getCenter();
+                //    alert("地图中心点变更为：" + center.lng + ", " + center.lat);
+                //});
+                var marker = arrBJ[1];
+                marker.addEventListener("mouseup", function (e) {
+                    alert("定位成功");
+                    nowLong = e.point.lng;
+                    nowLat = e.point.lat;
+                    console.log(nowLong);
+                    console.log(nowLat);
+                });
+
+                myZoomCtrl1 = new ZoomControl1();
+
+                //确认
+                myZoomCtrl2 = new ZoomControl2();
+
+                // 添加到地图当中
+                map2.addControl(myZoomCtrl1);
+                // 添加到地图当中
+                map2.addControl(myZoomCtrl2);
+
+
+            };
+
+            // 将DOM元素返回
+            return button;
+        };
+
+        // 添加"编辑" 到地图当中
+        map.addControl(myZoomCtrl);
+
+        //-------------------------------------确定--------------------------------------
+        ZoomControl1.prototype.initialize = function (map) {
+            // 创建一个DOM元素
+            var buttonQD = document.createElement("Button");
+            // 添加文字说明
+            buttonQD.appendChild(document.createTextNode("确 认"));
+            // 设置样式
+            buttonQD.style.position = "fixed";
+            buttonQD.style.cursor = "pointer";
+            buttonQD.style.border = "none";
+            buttonQD.style.width = "158px";
+            buttonQD.style.height = "40px";
+            //buttonQD.style.borderRadius="5px";
+            buttonQD.style.background = "#1DBFAD";
+            //buttonQD.style.opacity="0.5";
+            buttonQD.style.color = "#fff";
+            buttonQD.style.marginLeft = "500px";
+            buttonQD.style.marginTop = "10px";
+
+            // 绑定事件
+            buttonQD.onclick = function (e) {
+//            map.setZoom(map.getZoom() + 2); // 动作
+//            alert("地图已定位，不可更改！");
+                $(".popupMap").css({
+                    display: "none"
+                });
+                //$("#dituContent").css({
+                //    display : "block"
+                //});
+
+                console.log(nowLong);
+                console.log(nowLat);
+                if (typeof nowLong == "undefined" && typeof nowLat == "undefined") {
+                    nowLong = oriLong;
+                    nowLat = oriLat;
+                    //map = init("dituContent",oriLong,oriLat,"",false)[0];
+                    map = init("mapContent", nowLong, nowLat, "", false)[0];
+                } else {
+                    map = init("mapContent", nowLong, nowLat, "", false)[0];
+                    oriLong = nowLong;
+                    oriLat = nowLat;
+                }
+                //给页面详细经纬度赋值
+                $("#detailLng").val(nowLong);
+                //console.log($("#detailLng").val());
+                $("#detailLat").val(nowLat);
+
+                //经纬度转为地址，
+                var gc = new BMap.Geocoder();
+                var point = new BMap.Point(nowLong, nowLat);//经纬度
+                gc.getLocation(point, function (rs) {
+                    var addComp = rs.addressComponents;
+                    //$('#address').val(addComp.province + ", " + addComp.city + ", " + addComp.district + ", " + addComp.street + ", " + addComp.streetNumber);
+                    //alert(addComp.province  + ' '+ addComp.city + ' '+addComp.district +' '+ addComp.street+ ' '+addComp.streetNumber);
+                    //应先判断 省、市、区 数据是否改变，如有改变，则更改下拉框的值
+                    if (addComp.province != $("#proId option:selected").text()) {
+                        $("#proId option:selected").text(addComp.province);
+                    }
+
+                    if (addComp.city != $("#levId option:selected").text()) {
+                        $("#levId option:selected").text(addComp.city);
+                    }
+                    if (addComp.district != $("#resId option:selected").text()) {
+                        $("#resId option:selected").text(addComp.district);
+                    }
+                    //将详细地址设置为此值
+                    $("#jDizhi").val(addComp.street + addComp.streetNumber);
+
+                });
+
+
+                // 创建控件
+                var myZoomCtrl = new ZoomControl();
+                map.addControl(myZoomCtrl);
+                var myZoomCtrl3 = new ZoomControl3();
+                map.addControl(myZoomCtrl3);
+
+            };
+            // 添加DOM元素到地图中
+            map.getContainer().appendChild(buttonQD);
+
+            // 将DOM元素返回
+            return buttonQD;
+        };
+        //-------------------------------------取消--------------------------------------
+        ZoomControl2.prototype.initialize = function (map) {
+            // 创建一个DOM元素
+            var buttonQX = document.createElement("Button");
+            // 添加文字说明
+            buttonQX.appendChild(document.createTextNode("取 消"));
+            // 设置样式
+            buttonQX.style.cursor = "pointer";
+            buttonQX.style.width = "158px";
+            buttonQX.style.height = "40px";
+            //buttonQX.style.borderRadius="5px";
+            buttonQX.style.border = "0 none";
+            buttonQX.style.background = "#1DBFAD";
+            //buttonQX.style.opacity="0.5";
+            buttonQX.style.color = "#fff";
+            buttonQX.style.marginLeft = "550px";
+            buttonQX.style.marginTop = "10px";
+            buttonQX.style.position = "fixed";
+
+            // 绑定事件
+            buttonQX.onclick = function (e) {
+                $(".popupMap").css({
+                    display: "none"
+                });
+                //$("#dituContent").css({
+                //    display : "block"
+                //});
+                nowLong = oriLong;
+                nowLat = oriLat;
+                //map = init("dituContent",oriLong,oriLat,"",false)[0];
+                map = init("mapContent", nowLong, nowLat, "", false)[0];
+
+                //给页面详细经纬度赋值
+                $("#detailLng").val(nowLong);
+                //console.log($("#detailLng").val());
+                $("#detailLat").val(nowLat);
+
+                var myZoomCtrl = new ZoomControl();
+                map.addControl(myZoomCtrl);
+                var myZoomCtrl3 = new ZoomControl3();
+                map.addControl(myZoomCtrl3);
+            };
+            // 添加DOM元素到地图中
+            map.getContainer().appendChild(buttonQX);
+
+            // 将DOM元素返回
+            return buttonQX;
+        };
+
+
+        //----------------------------------end------------------------------------------
+
+        //详细地址传入后地图进行的操作
+        $("#jDizhi").on('change', function () {
+            var proId = $("#proId option:selected").text();
+            var levId = $("#levId option:selected").text();
+            var resId = $("#resId option:selected").text();
+
+            var jDizhi = $("#jDizhi").val();
+
+            var adress = proId + levId + resId + jDizhi;
+
+            var map = new BMap.Map("mapContent");
+            var point = new BMap.Point("116.403958", "39.915049");
+            map.centerAndZoom(point, 12);
+
+            map.enableScrollWheelZoom(true);
+
+            var marker = new BMap.Marker(point); //创建marker对象
+            marker.setIcon(new BMap.Icon('./img/map_mark.png', new BMap.Size(21, 34)));
+
+            // 创建地址解析器实例
+            var myGeo = new BMap.Geocoder();
+            // 将地址解析结果显示在地图上,并调整地图视野
+            myGeo.getPoint(adress, function (point) {
+                if (point) {
+                    map.centerAndZoom(point, 12);
+                    marker = new BMap.Marker(point); //创建marker对象
+                    marker.setIcon(new BMap.Icon('./img/map_mark.png', new BMap.Size(21, 34)));
+                    map.addOverlay(marker); //在地图中添加marker
+                    oriLong = point.lng;
+                    oriLat = point.lat;
+                    //给详细经纬度赋值
+                    $("#detailLng").val(oriLong);
+                    //console.log($("#detailLng").val());
+                    $("#detailLat").val(oriLat);
+                } else {
+                    alert("您选择地址没有解析到结果!");
+                }
+            }, proId);
+            myZoomCtrl = new ZoomControl();
+            // 添加到地图当中
+            map.addControl(myZoomCtrl);
+            myZoomCtrl3 = new ZoomControl3();
+            // 添加到地图当中
+            map.addControl(myZoomCtrl3);
+        });
+
+    });
+</script>
+</body>
+</html>
