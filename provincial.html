@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>省市区三联动</title>
+    <script src="./js/jquery-3.1.1.min.js"></script>
+</head>
+<body>
+<dl class="msg_list">
+    <dt>省市区</dt>
+    <dd>
+        <select name="proId" id="proId" style="width:140px;height:35px" class="province">
+            <option value="" class="">---请选择---</option>
+        </select>
+        <span>&nbsp;一&nbsp;</span>
+        <select name="levId" id="levId" style="width:140px;height:35px" class="city">
+            <option value="">---请选择---</option>
+        </select>
+        <span>&nbsp;一&nbsp;</span>
+        <select name="resId" id="resId" style="width:140px;height:35px" class="district">
+            <option value="">---请选择---</option>
+        </select>
+        <span>&nbsp;&nbsp;</span>
+    </dd>
+</dl>
+<script>
+    $(function(){
+        //=========================省市区=====================
+        //加载省数据
+        var provinceList;    //省接口返回的数据
+        var provinceData = {
+            //"uId" : 1,
+            "uId" : AUTOCAR.data_uId,
+            "id" : 0
+        };
+//        发送请求，获取返回数据
+        ajaxMethod("/vehiclecenter/basic/selectSysArea",provinceData);
+        console.log(provinceList);
+        //将返回的数据加载到页面上
+        $("#proId option:gt(0)").remove();
+        //$("#proId option").remove();
+        $.each(provinceList,function(index,item){
+            var html = '<option value="'+ item.id +'">'+ item.name +'</option>';
+            $("#proId").append(html);
+        });
+        //省改变注册事件,获取市的数据
+        var cityList;    //返回的市的数据
+        $("#proId").change(function(){
+            var _this = $(this);
+            console.log(_this.children("option:selected").val());
+            var data = {
+                //"uId" : 1,
+                "uId" : AUTOCAR.data_uId,
+                "id" : _this.children("option:selected").val()
+            };
+            ajaxMethod("/vehiclecenter/basic/selectSysArea",data);
+            $("#levId option:gt(0)").remove();//市清空
+            //$("#levId option").remove();//市清空
+            $("#resId option:gt(0)").remove();//区清空
+            //$("#resId option").remove();//区清空
+            $.each(cityList,function(index,item){
+                var html = '<option value="'+ item.id +'">'+ item.name +'</option>';
+                $("#levId").append(html);
+            });
+        });
+        //市改变注册事件，获取区的数据
+        var districtList;       //区返回的数据
+        $("#levId").change(function(){
+            var _this = $(this);
+            console.log(_this.children("option:selected").val());
+            var data = {
+                //"uId" : 1,
+                "uId" : AUTOCAR.data_uId,
+                "id" : _this.children("option:selected").val()
+            };
+            ajaxMethod("/vehiclecenter/basic/selectSysArea",data);
+            $("#resId option:gt(0)").remove();//区清空
+            //$("#resId option").remove();//区清空
+            $.each(districtList,function(index,item){
+                var html = '<option value="'+ item.id +'">'+ item.name +'</option>';
+                $("#resId").append(html);
+            });
+        });
+        $(".car_massage_page #proId").children("option[value="+ homeList.provinceId +"]").attr("selected",true);
+        var provinceData = {
+            //"uId" : 1,
+            "uId" : AUTOCAR.data_uId,
+            "id" : homeList.provinceId
+        };
+        ajaxMethod("/vehiclecenter/basic/selectSysArea",provinceData);
+        $.each(cityList,function(index,item){
+            var html = '<option value="'+ item.id +'">'+ item.name +'</option>';
+            $("#levId").append(html);
+        });
+        $(".car_massage_page #levId").children("option[value="+ homeList.cityId +"]").attr("selected",true);
+        var cityData = {
+            //"uId" : 1,
+            "uId" : AUTOCAR.data_uId,
+            "id" : homeList.cityId
+        };
+        ajaxMethod("/vehiclecenter/basic/selectSysArea",cityData);
+        $.each(districtList,function(index,item){
+            var html = '<option value="'+ item.id +'">'+ item.name +'</option>';
+            $("#resId").append(html);
+        });
+        $(".car_massage_page #resId").children("option[value="+ homeList.districtId +"]").attr("selected",true);
+
+    });
+</script>
+</body>
+</html>
